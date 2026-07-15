@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+</head>
+
+<body>
+    <header>
+        <h1>&#128100; 회원가입</h1>
+        <p>
+            서비스를 이용하기 위한 회원 정보를 입력해 주세요.
+        </p>
+    </header>
+    <main>
+        <form action="signUpResult.html" method="get">
+            <fieldset>
+                <legend>&#128274; 계정 정보</legend>
+                <p>
+                    <label for="userId">아이디 *</label><br>
+                    <input type="text" id="userId" name="userId" placeholder="영문과 숫자 조합 (4~20자)" minlength="4"
+                        maxlength="20" pattern="[A-Za-z0-9]+" autocomplete="username" required>
+                    <small id="userIdMessage"></small>
+                </p>
+                <p>
+                    <label for="password">비밀번호 *</label><br>
+                    <input type="password" id="password" name="password" placeholder="8자 이상 입력" minlength="8"
+                        autocomplete="new-password" required>
+                    <label for="passwordCheck">비밀번호 확인</label>
+                    <input type="password" id="passwordCheck">
+                    <br>
+                    <small id="passwordMessage"></small>
+                    <small id="passwordCheckMessage"></small>
+                </p>
+                <p>
+                    <label for="emailId">이메일 *</label><br>
+                    <input type="text" id="emailId" name="emailId" placeholder="example" autocomplete="email" required>
+                    @
+                    <select id="emailDomain" name="emailDomain" required>
+                        <option value="">선택하세요</option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="naver.com">naver.com</option>
+                        <option value="kakao.com">kakao.com</option>
+                        <option value="outlook.com">outlook.com</option>
+                        <option value="direct">직접 입력</option>
+                    </select>
+                    <input type="text" id="customDomain" name="customDomain" placeholder="직접 입력">
+                </p>
+            </fieldset>
+
+
+            <fieldset>
+                <legend>&#128100; 개인 프로필 정보</legend>
+                <p>
+                    <label for="name">이름 *</label><br>
+                    <input type="text" id="name" name="name" placeholder="이름 입력" autocomplete="name" required>
+                </p>
+                <p>
+                    <label for="birth">생년월일 *</label><br>
+                    <input type="date" id="birth" name="birth" autocomplete="bday" required>
+                </p>
+                <p>
+                    성별 *
+                    <br>
+                    <input type="radio" id="male" name="gender" value="male" required>
+                    <label for="male">남성</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">여성</label>
+                    <input type="radio" id="other" name="gender" value="other">
+                    <label for="other">기타</label>
+                </p>
+                <p>
+                    <span>관심 분야 (중복 선택 가능)</span>
+                    <br><br>
+                    <input type="checkbox" id="frontend" name="interest" value="frontend">
+                    <label for="frontend">
+                        웹 프론트엔드
+                    </label>
+
+                    <br>
+
+                    <input type="checkbox" id="uiux" name="interest" value="uiux">
+                    <label for="uiux">
+                        UI/UX 디자인 표준
+                    </label>
+
+                    <br>
+
+                    <input type="checkbox" id="backend" name="interest" value="backend">
+                    <label for="backend">
+                        백엔드 데이터베이스
+                    </label>
+
+                    <br>
+
+                    <input type="checkbox" id="cloud" name="interest" value="cloud">
+                    <label for="cloud">
+                        클라우드 인프라
+                    </label>
+                </p>
+
+                <p>
+                    <label for="joinPath">
+                        가입 경로
+                    </label>
+
+                    <br>
+
+                    <select id="joinPath" name="joinPath">
+                        <option value="">
+                            선택하세요
+                        </option>
+                        <option value="search">
+                            인터넷 검색
+                        </option>
+                        <option value="friend">
+                            친구 추천
+                        </option>
+                        <option value="github">
+                            GitHub
+                        </option>
+                        <option value="sns">
+                            SNS
+                        </option>
+                        <option value="academy">
+                            교육기관
+                        </option>
+                        <option value="etc">
+                            기타
+                        </option>
+                    </select>
+                </p>
+            </fieldset>
+
+
+            <fieldset>
+                <legend>&#128221; 자기소개</legend>
+                <p>
+                    <label for="intro">
+                        나를 표현하는 한 줄 소개
+                    </label>
+
+                    <br>
+
+                    <textarea maxlength="200" id="intro" name="intro" rows="6" cols="60"
+                        placeholder="안녕하세요. 웹 개발에 관심이 많아 가입했습니다."></textarea>
+                </p>
+                <small id="introCount"></small>
+            </fieldset>
+
+
+            <fieldset>
+                <legend>&#128196; 약관 동의</legend>
+                <details>
+                    <summary>
+                        이용약관 보기
+                    </summary>
+                    <p>
+                        본 사이트는 학습 목적으로 제작되었습니다.
+                        입력된 정보는 실제 서비스에 저장되지 않습니다.
+                    </p>
+
+                </details>
+                <p>
+                    <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                    <label for="agreeTerms">
+                        이용약관에 동의합니다. (필수)
+                    </label>
+                </p>
+                <p>
+                    <input type="checkbox" id="agreePrivacy" name="agreePrivacy">
+                    <label for="agreePrivacy">
+                        개인정보 수집 및 이용에 동의합니다.
+                    </label>
+                </p>
+            </fieldset>
+            <p>
+                <input type="submit" value="동의하고 회원가입">
+                <input type="reset" value="다시 작성">
+            </p>
+        </form>
+    </main>
+
+    <footer>
+        <p>
+            &#128197;
+            작업일 : 
+            <time datetime="2026-07">
+                2026년 7월
+            </time>
+        </p>
+    </footer>
+
+    <script>
+        const userId = document.querySelector("#userId");
+        const password = document.querySelector("#password");
+        const passwordCheck = document.querySelector("#passwordCheck");
+
+        const emailDomain = document.querySelector("#emailDomain");
+        const customDomain = document.querySelector("#customDomain");
+
+        const intro = document.querySelector("#intro");
+        const form = document.querySelector("form");
+
+        const userIdMessage =
+            document.querySelector("#userIdMessage");
+
+        const passwordMessage =
+            document.querySelector("#passwordMessage");
+
+        const passwordCheckMessage =
+            document.querySelector("#passwordCheckMessage");
+
+        const emailMessage =
+            document.querySelector("#emailMessage");
+
+        const introCount =
+            document.querySelector("#introCount");
+
+        introCount.textContent = "0 / 200";
+        userId.addEventListener("input", function () {
+            if (userId.value.length < 4) {
+                userIdMessage.textContent =
+                    "❌ 아이디는 4자 이상 입력하세요.";
+            }
+
+            else {
+                userIdMessage.textContent =
+                    "✔ 사용 가능한 길이입니다.";
+            }
+        });
+
+        password.addEventListener("input", function () {
+            const value = password.value;
+            if (value.length < 8) {
+                passwordMessage.textContent =
+                    "❌ 8자 이상 입력하세요.";
+
+            }
+
+            else if (
+                /[A-Z]/.test(value) &&
+                /[0-9]/.test(value) &&
+                /[^A-Za-z0-9]/.test(value)
+            ) {
+                passwordMessage.textContent =
+                    "✔ 안전한 비밀번호입니다.";
+            }
+            else {
+                passwordMessage.textContent =
+                    "⚠ 영문 대문자, 숫자, 특수문자를 함께 사용하면 더욱 안전합니다.";
+            }
+        });
+
+                password.addEventListener("input", function () {
+            if (password.value === passwordCheck.value) {
+                passwordCheckMessage.textContent =
+                    "✔ 비밀번호가 일치합니다.";
+            }
+            else {
+                passwordCheckMessage.textContent =
+                    "❌ 비밀번호가 일치하지 않습니다.";
+            }
+        });
+        passwordCheck.addEventListener("input", function () {
+            if (password.value === passwordCheck.value) {
+                passwordCheckMessage.textContent =
+                    "✔ 비밀번호가 일치합니다.";
+            }
+            else {
+                passwordCheckMessage.textContent =
+                    "❌ 비밀번호가 일치하지 않습니다.";
+            }
+        });
+
+        emailDomain.addEventListener("change", function () {
+            if (emailDomain.value === "direct") {
+                customDomain.disabled = false;
+                customDomain.focus();
+                emailMessage.textContent =
+                    "도메인을 직접 입력하세요.";
+            }
+            else {
+                customDomain.value = "";
+                customDomain.disabled = true;
+                emailMessage.textContent =
+                    "✔ 이메일 도메인이 선택되었습니다.";
+            }
+        });
+
+        intro.addEventListener("input", function () {
+            introCount.textContent =
+                intro.value.length + " / 200";
+        });
+
+        form.addEventListener("submit", function (event) {
+            if (password.value !== passwordCheck.value) {
+                alert("비밀번호가 일치하지 않습니다.");
+                event.preventDefault();
+                return;
+            }
+        });
+    </script>
+</body>
+
+</html>
