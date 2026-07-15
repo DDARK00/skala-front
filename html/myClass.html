@@ -8,130 +8,204 @@
 <body>
 
     <header>
-        <h1>&#128218; 나의 강의 시간표</h1>
+        <h1 id="title">
+            &#128218; 나의 강의 시간표
+        </h1>
         <p>
             &#128197;
-            <time datetime="2026-07">2026년 3분기</time>
+            <time datetime="2026-07">
+                2026년 3분기
+            </time>
             시간표입니다.
         </p>
+        <hr color="navy" size="3">
     </header>
 
     <main>
         <section id="timetable">
-            <h2 title="2026년 3분기 시간표">&#128198; 2026년 3분기 시간표</h2>
+            <h2 title="2026년 3분기 시간표">
+                &#128198; 2026년 3분기 시간표
+            </h2>
 
-            <table border="1" cellpadding="10" title="주간 강의 시간표">
+            <table border="2" cellpadding="15" cellspacing="3" width="95%" title="주간 강의 시간표">
                 <caption>
-                    <strong>&#128467; 주간 강의 시간표</strong>
+                    <strong>
+                        &#128467; 주간 강의 시간표
+                    </strong>
                 </caption>
 
                 <thead>
                     <tr>
-                        <th scope="col">&#128338; 시간</th>
-                        <th scope="col">월요일</th>
-                        <th scope="col">화요일</th>
-                        <th scope="col">수요일</th>
-                        <th scope="col">목요일</th>
-                        <th scope="col">금요일</th>
+                        <th scope="col">
+                            &#128338; 시간
+                        </th>
+                        <th scope="col" class="day">
+                            월요일
+                        </th>
+                        <th scope="col" class="day">
+                            화요일
+                        </th>
+                        <th scope="col" class="day">
+                            수요일
+                        </th>
+                        <th scope="col" class="day">
+                            목요일
+                        </th>
+                        <th scope="col" class="day">
+                            금요일
+                        </th>
                     </tr>
                 </thead>
 
                 <tbody>
 
                     <tr>
-                        <th scope="row">09:00 - 10:00</th>
-                        <td rowspan="3" title="3시간 강의">
-                            &#128187; Vue.js <br> 웹 프레임워크
+                        <th scope="row">
+                            09:00 - 10:00
+                        </th>
+                        <td rowspan="3" class="lecture3">
+                            &#128187; Vue.js <br>
+                            웹 프레임워크
                         </td>
-                        <td rowspan="2" title="2시간 강의">
+                        <td rowspan="2" class="lecture2">
                             &#128736; 프로젝트
                         </td>
-                        <td rowspan="3" title="3시간 강의">
-                            &#127760; 웹 시스템 <br> 설계 및 분석
+                        <td rowspan="3" class="lecture3">
+                            &#127760; 웹 시스템 <br>
+                            설계 및 분석
                         </td>
-                        <td>
+                        <td class="lecture1">
                             &#128161; IT 트렌드 특강
                         </td>
-                        <td rowspan="3" title="3시간 강의">
-                            &#128187; 자바스크립트 <br> 심화 실습
+                        <td rowspan="3" class="lecture3">
+                            &#128187; 자바스크립트 <br>
+                            심화 실습
                         </td>
                     </tr>
 
                     <tr>
-                        <th scope="row">10:00 - 11:00</th>
-                        <td rowspan="2" title="2시간 강의">
+                        <th scope="row">
+                            10:00 - 11:00
+                        </th>
+                        <td rowspan="2" class="lecture2">
                             &#128190; 데이터베이스 <br>
-                            <abbr title="Structured Query Language">SQL</abbr> 실습
+                            <abbr title="Structured Query Language">
+                                SQL
+                            </abbr>
+                            실습
                         </td>
                     </tr>
 
                     <tr>
-                        <th scope="row">11:00 - 12:00</th>
-                        <td>
+                        <th scope="row">
+                            11:00 - 12:00
+                        </th>
+                        <td class="lecture1">
                             &#129504; 알고리즘 문제 풀이
                         </td>
                     </tr>
 
                     <tr>
-                        <th scope="row">12:00 - 13:00</th>
-                        <td colspan="5" align="center" title="점심시간">
-                            &#127857; 점심시간
+                        <th scope="row">
+                            12:00 - 13:00
+                        </th>
+                        <td colspan="5" align="center" class="lunch">
+
+                            &#127857;
+                            점심시간
                         </td>
                     </tr>
 
                     <tr>
-                        <th scope="row">13:00 - 14:00</th>
-                        <td rowspan="4" title="4시간 강의">
+                        <th scope="row">
+                            13:00 - 14:00
+                        </th>
+                        <td rowspan="4" class="lecture4">
                             &#127912;
-                            <abbr title="User Interface / User Experience">UI/UX</abbr>
-                            <br> 디자인 표준
+                            <abbr title="User Interface / User Experience">
+                                UI/UX
+                            </abbr>
+                            <br>
+                            디자인 표준
                         </td>
-                        <td rowspan="2" title="2시간 강의">
-                            &#128187; 리눅스 <br> 시스템 관리
+                        <td rowspan="2" class="lecture2">
+                            &#128187;
+                            리눅스
+                            <br>
+                            시스템 관리
                         </td>
-                        <td rowspan="2" title="2시간 강의">
-                            &#9729; 클라우드 <br>
-                            <abbr title="Amazon Web Services">AWS</abbr> 기초
+                        <td rowspan="2" class="lecture2">
+                            &#9729;
+                            클라우드
+                            <br>
+                            <abbr title="Amazon Web Services">
+                                AWS
+                            </abbr>
+                            기초
                         </td>
-                        <td rowspan="3" title="3시간 강의">
-                            &#128214; 자료구조
+                        <td rowspan="3" class="lecture3">
+                            &#128214;
+                            자료구조
                         </td>
-                        <td>
-                            &#128640; 개인 프로젝트
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">14:00 - 15:00</th>
-                        <td rowspan="3" title="3시간 강의">
-                            &#128736; 오픈소스 <br> 소프트웨어
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">15:00 - 16:00</th>
-                        <td rowspan="3" title="3시간 강의">
-                            &#128193; Git &amp; GitHub <br> 버전 관리
-                        </td>
-                        <td rowspan="3" title="3시간 강의">
-                            &#129302; 인공지능 <br> 머신러닝 기초
+                        <td class="lecture1">
+                            &#128640;
+                            개인 프로젝트
                         </td>
                     </tr>
 
                     <tr>
-                        <th scope="row">16:00 - 17:00</th>
-                        <td rowspan="2" title="2시간 강의">
-                            &#128202; 빅데이터 <br> 분석 실무
+                        <th scope="row">
+                            14:00 - 15:00
+                        </th>
+                        <td rowspan="3" class="lecture3">
+                            &#128736;
+                            오픈소스
+                            <br>
+                            소프트웨어
                         </td>
                     </tr>
 
                     <tr>
-                        <th scope="row">17:00 - 18:00</th>
-                        <td>
-                            &#127891; 취업 창업 특강
+                        <th scope="row">
+                            15:00 - 16:00
+                        </th>
+                        <td rowspan="3" class="lecture3">
+                            &#128193;
+                            Git &amp; GitHub
+                            <br>
+                            버전 관리
                         </td>
-                        <td>
-                            &#9997; 주간 회고
+                        <td rowspan="3" class="lecture3">
+                            &#129302;
+                            인공지능
+                            <br>
+                            머신러닝 기초
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">
+                            16:00 - 17:00
+                        </th>
+                        <td rowspan="2" class="lecture2">
+                            &#128202;
+                            빅데이터
+                            <br>
+                            분석 실무
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">
+                            17:00 - 18:00
+                        </th>
+                        <td class="lecture1">
+                            &#127891;
+                            취업 창업 특강
+                        </td>
+                        <td class="lecture1">
+                            &#9997;
+                            주간 회고
                         </td>
                     </tr>
 
@@ -142,21 +216,83 @@
                         <td colspan="6" align="center">
                             &#9989;
                             총
-                            <strong>18개 항목</strong>이 있으며,
+                            <strong>
+                                18개 항목
+                            </strong>
+                            이 있으며,
                             점심시간은
-                            <strong>12:00 ~ 13:00</strong>
+                            <strong>
+                                12:00 ~ 13:00
+                            </strong>
                             입니다.
                         </td>
                     </tr>
                 </tfoot>
-
             </table>
         </section>
     </main>
 
-    <footer>
-        <p>&#128221; HTML Table 실습 예제</p>
+    <footer id="footer">
+        <p>
+            &#128221;
+            HTML Table 실습 예제
+        </p>
     </footer>
 
+
+    <script>
+        window.onload = function () {
+            // 제목, footer 정렬
+            document
+                .getElementById("title")
+                .align = "center";
+
+            document
+                .getElementById("footer")
+                .align = "center";
+
+            // 강의 시간별 색상
+            let lecture1 =
+                document.querySelectorAll(".lecture1");
+
+            let lecture2 =
+                document.querySelectorAll(".lecture2");
+
+            let lecture3 =
+                document.querySelectorAll(".lecture3");
+
+            let lecture4 =
+                document.querySelectorAll(".lecture4");
+
+            lecture1.forEach(function (cell) {
+                cell.bgColor = "#ffffff";
+            });
+
+            lecture2.forEach(function (cell) {
+                cell.bgColor = "#d9edf7";
+            });
+
+            lecture3.forEach(function (cell) {
+                cell.bgColor = "#dff0d8";
+            });
+
+            lecture4.forEach(function (cell) {
+                cell.bgColor = "#fce4ec";
+            });
+
+            // 요일 배경
+            let days =
+                document.querySelectorAll(".day");
+
+            days.forEach(function (day) {
+                day.bgColor = "#cfe8ff";
+            });
+            // 점심시간
+            let lunch =
+                document.querySelector(".lunch");
+            lunch.bgColor = "#fff3cd";
+        }
+    </script>
 </body>
+
 </html>
