@@ -30,6 +30,7 @@
                         autocomplete="new-password" required>
                     <label for="passwordCheck">비밀번호 확인</label>
                     <input type="password" id="passwordCheck">
+                    <input type="checkbox" id="pwOpen"><label for="pwOpen">비밀번호 보기</label>
                     <br>
                     <small id="passwordMessage"></small>
                     <small id="passwordCheckMessage"></small>
@@ -186,7 +187,7 @@
     <footer>
         <p>
             &#128197;
-            작업일 : 
+            작업일 :
             <time datetime="2026-07">
                 2026년 7월
             </time>
@@ -209,6 +210,9 @@
 
         const passwordMessage =
             document.querySelector("#passwordMessage");
+
+        const pwOpen =
+            document.querySelector("#pwOpen")
 
         const passwordCheckMessage =
             document.querySelector("#passwordCheckMessage");
@@ -254,7 +258,7 @@
             }
         });
 
-                password.addEventListener("input", function () {
+        password.addEventListener("input", function () {
             if (password.value === passwordCheck.value) {
                 passwordCheckMessage.textContent =
                     "✔ 비밀번호가 일치합니다.";
@@ -264,6 +268,17 @@
                     "❌ 비밀번호가 일치하지 않습니다.";
             }
         });
+
+        pwOpen.addEventListener("input", function () {
+            if (pwOpen.checked) {
+                password.type = "text";
+                passwordCheck.type = "text";
+            } else {
+                password.type = "password";
+                passwordCheck.type = "text"
+            }
+        })
+
         passwordCheck.addEventListener("input", function () {
             if (password.value === passwordCheck.value) {
                 passwordCheckMessage.textContent =
