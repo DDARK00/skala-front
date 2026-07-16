@@ -1,134 +1,177 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/globe.css" />
     <title>[과제] Project 구성과 index.html</title>
 </head>
+
 <body>
-    <header id="top">
-        <h1 title="스칼라 프로젝트 메인 페이지">
-            &#127881; 환영합니다
-        </h1>
-        <p>
-            &#128075;
-            스칼라에 오신 것을 환영합니다.
-            이 페이지는 개인 프로젝트의 시작 화면입니다.
-        </p>
+    <div class="trip-header-gap"> </div>
+    <header id="top" class="trip-header-container header-center">
+        <div class="trip-header-text">
+            <p class="trip-eyebrow">PERSONAL PROJECT · 2026</p>
+            <h1 title="스칼라 프로젝트 메인 페이지">🎉 환영합니다</h1>
+            <p class="trip-subtitle">👋 스칼라에 오신 것을 환영합니다. 이 페이지는 개인 프로젝트의 시작 화면입니다.</p>
+        </div>
     </header>
 
-    <nav title="페이지 바로가기">
-        <h2>
-            &#128279; 바로가기
-        </h2>
-        <ul>
-            <li>
-                <a href="myClass.html" title="나의 수업 페이지 이동">
-                    &#127891; 나의 수업
-                </a>
-            </li>
-            <li>
-                <a href="holiday.html" title="나의 휴일 페이지 이동">
-                    &#127958; 나의 휴일
-                </a>
-            </li>
-            <li>
-                <a href="myProfile.html" title="나의 프로필 페이지 이동">
-                    &#128100; 나의 프로필
-                </a>
-            </li>
-            <li>
-                <a href="myTrip.html" title="나의 프로필 페이지 이동">
-                    &#128100; 나의 여행 로그
-                </a>
-            </li>
-            <li>
-                <a href="signUp.html" title="나의 프로필 페이지 이동">
-                    &#128100; 회원가입 창
-                </a>
-            </li>
-            <li>
-                <a href="signUpResult.html" title="나의 프로필 페이지 이동">
-                    &#128100; 회원가입 완료
-                </a>
-            </li>
+    <nav class="page-nav" aria-label="페이지 바로가기">
+        <p class="trip-detail-eyebrow">🔗 바로가기</p>
+        <ul class="choice-row profile-nav-list"s">
+            <li class="choice"><a href="./myClass.html" title="나의 수업 페이지 이동">🎓 나의 수업</a></li>
+            <li class="choice"><a href="./holiday.html" title="나의 휴일 페이지 이동">🏖 나의 휴일</a></li>
+            <li class="choice"><a href="./myProfile.html" title="나의 프로필 페이지 이동">👤 나의 프로필</a></li>
+            <li class="choice"><a href="./myTrip.html" title="나의 여행 로그 페이지 이동">📸 나의 여행 로그</a></li>
+            <li class="choice"><a href="./signUp.html" title="회원가입 페이지 이동">📝 회원가입 창</a></li>
+            <li class="choice"><a href="./signUpResult.html" title="회원가입 완료 페이지 이동">🎉 회원가입 완료</a></li>
         </ul>
     </nav>
-    <main>
-        <section id="introduction">
-            <h2>
-                &#128640; 프로젝트 소개
-            </h2>
-            <p>
-                이 프로젝트는 학습 내용,
-                일상 기록,
-                개인 정보로 구성된
-                과제 제출 페이지입니다.
-            </p>
-        </section>
-        <section id="guide">
-            <h2>
-                &#128221; 이용 안내
-            </h2>
-            <ol>
-                <li>
-                    &#127891;
-                    나의 수업에서 학습 계획과 시간표를 확인합니다.
-                </li>
-                <li>
-                    &#127958;
-                    나의 휴일에서 일상과 휴식 계획을 확인합니다.
-                </li>
-                <li>
-                    &#128100;
-                    나의 프로필에서 관심 분야와 특징을 확인합니다.
-                </li>
-            </ol>
-        </section>
-        <section id="project-status">
-            <h2>
-                &#128200; 진행 상황
-            </h2>
-            <p>
-                현재 제작 진행률:
-                <progress title="100%" value="100" max="100">
-                    100%
-                </progress>
-            </p>
-        </section>
-        <section id="extra-info">
 
-            <h2>
-                &#128161; 추가 정보
-            </h2>
-            <details>
-                <summary>
-                    프로젝트 제작 방향 보기
-                </summary>
-                <p>
-                    HTML의 시맨틱 태그와 다양한 요소를 활용하여
-                    의미 있는 웹 페이지 구조를 만드는 것을 목표로 합니다.
+    <div class="page-layout">
+        <main class="page-main">
+            <section id="introduction">
+                <h2>🚀 프로젝트 소개</h2>
+                <p>이 프로젝트는 학습 내용, 일상 기록, 개인 정보로 구성된 과제 제출 페이지입니다.</p>
+            </section>
+
+            <section id="globe-section">
+                <h2>🌍 나의 여행 지구본</h2>
+                <p>드래그해서 회전시켜보고, 표시된 도시를 클릭하면 지도로 이동합니다.</p>
+
+                <div class="globe-frame">
+                    <div class="globe-app">
+                        <canvas id="globe" role="img" aria-label="제가 방문한 세 도시를 표시한 3D 지구본"></canvas>
+                        <div class="overlay">
+                            <p class="globe-hint">🖱 드래그해서 회전 · 도시 클릭 시 지도로 이동</p>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="globe-legend">
+                    <li>
+                        <span class="legend-dot" style="--dot-color:#fb7185"></span>
+                        <a href="https://www.google.com/maps?q=Adiyaman" target="_blank" rel="noopener">Adiyaman, Türkiye</a>
+                    </li>
+                    <li>
+                        <span class="legend-dot" style="--dot-color:#facc15"></span>
+                        <a href="https://www.google.com/maps?q=Athens" target="_blank" rel="noopener">Athens, Greece</a>
+                    </li>
+                    <li>
+                        <span class="legend-dot" style="--dot-color:#4ade80"></span>
+                        <a href="https://www.google.com/maps?q=Ninh+Binh" target="_blank" rel="noopener">Ninh Binh, Vietnam</a>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="guide">
+                <h2>📝 이용 안내</h2>
+                <ol>
+                    <li>🎓 나의 수업에서 학습 계획과 시간표를 확인합니다.</li>
+                    <li>🏖 나의 휴일에서 일상과 휴식 계획을 확인합니다.</li>
+                    <li>👤 나의 프로필에서 관심 분야와 특징을 확인합니다.</li>
+                </ol>
+            </section>
+
+            <section id="project-status">
+                <h2>📈 진행 상황</h2>
+                <p class="progress-row">
+                    현재 제작 진행률:
+                    <progress title="100%" value="100" max="100">100%</progress>
+                    <span class="progress-value">100%</span>
                 </p>
-            </details>
-        </section>
-    </main>
-    <hr>
-    <footer>
-        <p>
-            &#128203;
-            개인 프로젝트 페이지
-        </p>
-        <p>
-            제작일:
-            <time datetime="2026-07">
-                2026년 7월
-            </time>
-        </p>
-        <p>
-            <a href="#top">
-                &#11014; 맨 위로 이동
-            </a>
-        </p>
+            </section>
+
+            <section id="extra-info">
+                <h2>💡 추가 정보</h2>
+                <details class="terms-box" id="projectDirection">
+                    <summary>프로젝트 제작 방향 보기</summary>
+                    <div class="terms-content">
+                        <p>HTML의 시맨틱 태그와 다양한 요소를 활용하여 의미 있는 웹 페이지 구조를 만드는 것을 목표로 합니다.</p>
+                    </div>
+                </details>
+            </section>
+        </main>
+
+        <aside class="page-aside" aria-label="미니 게임 & 스크립트">
+            <div class="aside-card">
+                <p class="trip-eyebrow">MINI SCRIPTS</p>
+                <h2>🎮 미니 게임 &amp; 스크립트</h2>
+                <p class="aside-desc">순수 JavaScript로 만든 실습 스크립트 3가지입니다. 버튼을 눌러 시작해보세요.</p>
+
+                <section id="game-updown" class="game-block">
+                    <h3>🔢 업다운 숫자 맞추기</h3>
+                    <p>컴퓨터가 1~50 사이의 숫자를 정합니다. 몇 번 만에 맞히는지 도전해보세요.</p>
+                    <button id="startUpDown" class="btn btn--primary">게임 시작</button>
+                </section>
+
+                <section id="game-grade" class="game-block">
+                    <h3>📊 성적 계산기</h3>
+                    <p>HTML · CSS · JavaScript 세 과목 점수를 입력하면 평균과 합격 여부를 알려줍니다.</p>
+                    <button id="startGrade" class="btn btn--primary">점수 입력 시작</button>
+                </section>
+
+                <section id="game-bag" class="game-block">
+                    <h3>🎒 내 가방 속 물건</h3>
+                    <p>제 가방 속에 무엇이 들어있는지 확인해보세요.</p>
+                    <button id="showBag" class="btn btn--primary">가방 열어보기</button>
+                    <ul id="bagList" class="bag-list" aria-live="polite"></ul>
+                </section>
+            </div>
+        </aside>
+    </div>
+
+    <hr class="section-divider">
+
+    <footer class="site-footer">
+        <p>📋 개인 프로젝트 페이지</p>
+        <p>제작일: <time datetime="2026-07">2026년 7월</time></p>
+        <p><a href="#top">⬆ 맨 위로 이동</a></p>
     </footer>
+
+    <script type="module" src="../script/globe.js"></script>
+    <script src="../script/upDown.js"></script>
+    <script src="../script/grade.js"></script>
+    <script src="../script/bag.js"></script>
+    <script>
+        // "프로젝트 제작 방향 보기" 부드럽게 열고 닫기 (다른 페이지와 동일한 패턴)
+        const directionBox = document.querySelector("#projectDirection");
+        const directionSummary = directionBox.querySelector("summary");
+        const directionContent = directionBox.querySelector(".terms-content");
+
+        directionSummary.addEventListener("click", (event) => {
+            event.preventDefault();
+            directionBox.open ? closeDirection() : openDirection();
+        });
+
+        function openDirection() {
+            directionBox.open = true;
+            const targetHeight = directionContent.scrollHeight;
+            directionContent.style.height = "0px";
+            requestAnimationFrame(() => {
+                directionContent.style.height = targetHeight + "px";
+            });
+            directionContent.addEventListener("transitionend", function onEnd() {
+                directionContent.style.height = "auto";
+                directionContent.removeEventListener("transitionend", onEnd);
+            }, { once: true });
+        }
+
+        function closeDirection() {
+            directionContent.style.height = directionContent.scrollHeight + "px";
+            requestAnimationFrame(() => {
+                directionContent.style.height = "0px";
+            });
+            directionContent.addEventListener("transitionend", function onEnd() {
+                directionBox.open = false;
+                directionContent.style.height = "";
+                directionContent.removeEventListener("transitionend", onEnd);
+            }, { once: true });
+        }
+    </script>
 </body>
+
 </html>

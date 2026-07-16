@@ -1235,23 +1235,232 @@ mark {
 
 /* ---------------- 페이지 이동 nav ---------------- */
 
-.result-nav {
+.result-nav,
+.page-nav {
     text-align: center;
     margin: 8px 0 28px;
 }
 
-.result-nav .trip-detail-eyebrow {
+.result-nav .trip-detail-eyebrow,
+.page-nav .trip-detail-eyebrow {
     display: inline-block;
     margin-bottom: 12px;
 }
 
-.result-nav .choice-row {
+.result-nav .choice-row,
+.page-nav .choice-row {
     list-style: none;
     justify-content: center;
 }
 
-.result-nav .choice a {
+.result-nav .choice a,
+.page-nav .choice a {
     text-decoration: none;
     color: inherit;
     font-weight: 600;
+}
+/* ==================================================
+   INDEX (메인) 페이지
+   ================================================== */
+
+.page-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 10px 20px 30px;
+}
+
+.page-main {
+    flex: 2 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.page-main > section {
+    background: var(--color-card);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: 28px 32px;
+}
+
+.page-main h2 {
+    font-size: 20px;
+    margin-bottom: 14px;
+    color: var(--color-ink);
+}
+
+.page-main > section > p {
+    color: var(--color-ink-soft);
+    line-height: 1.7;
+}
+
+.page-main ol,
+.page-main > section > ul {
+    padding-left: 22px;
+    margin-top: 10px;
+    display: grid;
+    gap: 8px;
+    color: var(--color-ink);
+}
+
+/* ---------------- 지구본 카드 ---------------- */
+
+.globe-legend {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--color-ink-soft);
+}
+
+.legend-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--dot-color, var(--color-teal));
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+/* ---------------- 진행률 ---------------- */
+
+.progress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+progress {
+    width: 220px;
+    height: 12px;
+    border: none;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+progress::-webkit-progress-bar {
+    background: var(--color-paper-alt);
+    border-radius: 999px;
+}
+
+progress::-webkit-progress-value {
+    background: var(--color-teal);
+    border-radius: 999px;
+    transition: width .4s var(--ease);
+}
+
+progress::-moz-progress-bar {
+    background: var(--color-teal);
+    border-radius: 999px;
+}
+
+.progress-value {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-stamp-dark);
+}
+
+/* ---------------- 사이드바: 미니 게임 ---------------- */
+
+.page-aside {
+    flex: 1 1 300px;
+    position: sticky;
+    top: calc(var(--header-h) + 20px);
+}
+
+.aside-card {
+    background: var(--color-card);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: 28px;
+}
+
+.aside-card h2 {
+    font-size: 19px;
+    margin: 4px 0 10px;
+    color: var(--color-ink);
+}
+
+.aside-desc {
+    color: var(--color-ink-soft);
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.game-block {
+    padding: 18px 0;
+    border-top: 1px dashed rgba(35, 43, 61, .16);
+}
+
+.game-block:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+.game-block h3 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: var(--color-ink);
+}
+
+.game-block p {
+    font-size: 13.5px;
+    color: var(--color-ink-soft);
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.game-block .btn {
+    padding: 10px 22px;
+    font-size: 13.5px;
+}
+
+.bag-list {
+    list-style: none;
+    margin-top: 14px;
+    display: grid;
+    gap: 8px;
+}
+
+.bag-list li {
+    background: var(--color-paper-alt);
+    border-radius: var(--radius-card);
+    padding: 9px 14px;
+    font-size: 13.5px;
+    color: var(--color-ink);
+}
+
+/* ---------------- 구분선 & 반응형 ---------------- */
+
+.section-divider {
+    border: none;
+    border-top: 1px dashed rgba(35, 43, 61, .18);
+    max-width: 1180px;
+    margin: 10px auto 0;
+}
+
+@media (max-width: 860px) {
+    .page-layout {
+        flex-direction: column;
+    }
+
+    .page-aside {
+        position: static;
+        width: 100%;
+    }
+
+    .page-nav .choice-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }

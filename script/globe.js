@@ -8,7 +8,7 @@
 import {
     continents
 }
-    from "./landData.js";
+    from "../assets/landData.js";
 const canvas = document.getElementById("globe");
 const ctx = canvas.getContext("2d");
 
@@ -582,7 +582,7 @@ function resize() {
     height = canvas.clientHeight;
 
 
-    dpr = window.devicePixelRatio || 1;
+dpr = Math.min(window.devicePixelRatio || 1, 2);
 
 
     canvas.width =
@@ -1065,7 +1065,7 @@ function drawCities() {
         ctx.save();
 
 
-        ctx.shadowBlur = 15;
+        ctx.shadowBlur = 8;
 
         ctx.shadowColor =
             source.color;
@@ -1210,7 +1210,7 @@ function drawSphere() {
     ctx.save();
 
 
-    ctx.shadowBlur = 40;
+    ctx.shadowBlur = 22;
 
     ctx.shadowColor =
         "rgba(56,189,248,0.5)";
@@ -1262,9 +1262,9 @@ function animate() {
         }
 
     }
-    requestAnimationFrame(
-        animate
-    );
+    // requestAnimationFrame(
+    //     animate
+    // );
     time += 0.05;
     if (!globe.dragging) {
 
@@ -1307,6 +1307,12 @@ function animate() {
     drawRoutes();
 
     drawCities();
+    if (isGlobeVisible) {
+        rafId = requestAnimationFrame(animate);
+    } else {
+        rafId = null;
+    }
+
 }
 
 
@@ -1320,4 +1326,18 @@ createContinents();
 
 createRoutes();
 
-animate();
+let isGlobeVisible = false;
+let rafId = null;
+
+const globeVisibilityObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            isGlobeVisible = entry.isIntersecting;
+            if (isGlobeVisible && rafId === null) {
+                rafId = requestAnimationFrame(animate);
+            }
+        });
+    },
+    { rootMargin: "400px 0px", threshold: 0 }
+);
+globeVisibilityObserver.observe(canvas);
