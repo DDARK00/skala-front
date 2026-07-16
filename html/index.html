@@ -7,6 +7,23 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/globe.css" />
     <title>[과제] Project 구성과 index.html</title>
+
+    <style>
+        .profile-layout-container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            gap: 28px;
+            align-items: flex-start;
+        }
+
+        li a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,18 +35,20 @@
             <p class="trip-subtitle">👋 스칼라에 오신 것을 환영합니다. 이 페이지는 개인 프로젝트의 시작 화면입니다.</p>
         </div>
     </header>
+    <div class="page-nav-container">
 
-    <nav class="page-nav" aria-label="페이지 바로가기">
-        <p class="trip-detail-eyebrow">🔗 바로가기</p>
-        <ul class="choice-row profile-nav-list">
-            <li class="choice"><a href="./myClass.html" title="나의 수업 페이지 이동">🎓 나의 수업</a></li>
-            <li class="choice"><a href="./holiday.html" title="나의 휴일 페이지 이동">🏖 나의 휴일</a></li>
-            <li class="choice"><a href="./myProfile.html" title="나의 프로필 페이지 이동">👤 나의 프로필</a></li>
-            <li class="choice"><a href="./myTrip.html" title="나의 여행 로그 페이지 이동">📸 나의 여행 로그</a></li>
+        <nav class="page-nav" aria-label="페이지 바로가기">
+            <p class="trip-detail-eyebrow">🔗 바로가기</p>
+            <ul class="choice-row profile-nav-list">
+                <li class="choice"><a href="./myClass.html" title="나의 수업 페이지 이동">🎓 나의 수업</a></li>
+                <li class="choice"><a href="./holiday.html" title="나의 휴일 페이지 이동">🏖 나의 휴일</a></li>
+                <li class="choice"><a href="./myProfile.html" title="나의 프로필 페이지 이동">👤 나의 프로필</a></li>
+                <li class="choice"><a href="./myTrip.html" title="나의 여행 로그 페이지 이동">📸 나의 여행 로그</a></li>
             <li class="choice"><a href="./signUp.html" title="회원가입 페이지 이동">📝 회원가입 창</a></li>
             <li class="choice"><a href="./signUpResult.html" title="회원가입 완료 페이지 이동">🎉 회원가입 완료</a></li>
         </ul>
     </nav>
+</div>
 
     <div class="page-layout">
         <main class="page-main">
@@ -41,7 +60,7 @@
             <section id="globe-section">
                 <h2>🌍 나의 여행 지구본</h2>
                 <p>드래그해서 회전시켜보고, 표시된 도시를 클릭하면 지도로 이동합니다.</p>
-                <p>자세한 여행 내용은 <a href="./myTrip.html" >이곳</a>을 참조하세요</p>
+                <p>자세한 여행 내용은 <a href="./myTrip.html">이곳</a>을 참조하세요</p>
                 <div class="globe-frame">
                     <div class="globe-app">
                         <canvas id="globe" role="img" aria-label="제가 방문한 세 도시를 표시한 3D 지구본"></canvas>
@@ -54,7 +73,8 @@
                 <ul class="globe-legend">
                     <li>
                         <span class="legend-dot" style="--dot-color:#fb7185"></span>
-                        <a href="https://www.google.com/maps?q=Adiyaman" target="_blank" rel="noopener">Adiyaman, Türkiye</a>
+                        <a href="https://www.google.com/maps?q=Adiyaman" target="_blank" rel="noopener">Adiyaman,
+                            Türkiye</a>
                     </li>
                     <li>
                         <span class="legend-dot" style="--dot-color:#facc15"></span>
@@ -62,7 +82,8 @@
                     </li>
                     <li>
                         <span class="legend-dot" style="--dot-color:#4ade80"></span>
-                        <a href="https://www.google.com/maps?q=Ninh+Binh" target="_blank" rel="noopener">Ninh Binh, Vietnam</a>
+                        <a href="https://www.google.com/maps?q=Ninh+Binh" target="_blank" rel="noopener">Ninh Binh,
+                            Vietnam</a>
                     </li>
                 </ul>
             </section>

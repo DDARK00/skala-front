@@ -576,6 +576,7 @@ video {
 
 .header-center {
     justify-content: center;
+    align-items: center;
 }
 
 .header-center .trip-header-text {
@@ -1259,6 +1260,11 @@ mark {
     color: inherit;
     font-weight: 600;
 }
+
+
+.page-nav-container {
+    padding: 20px
+}
 /* ==================================================
    INDEX (메인) 페이지
    ================================================== */
@@ -1279,7 +1285,7 @@ mark {
     flex-direction: column;
     gap: 28px;
 }
-
+.page-nav,
 .page-main > section {
     background: var(--color-card);
     border-radius: var(--radius-card);
