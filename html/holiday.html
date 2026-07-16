@@ -1,164 +1,542 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나의 휴일 일과</title>
+    <title>나의 휴일 일과 - Holiday Daily Routine</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* ==================================================
+           Holiday Page Custom Styles (Integrating with Common CSS)
+           ================================================== */
+
+        /* Layout Container */
+        .holiday-layout {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* Sticky Navigation Sidebar */
+        .holiday-nav-sticky {
+            position: sticky;
+            top: calc(var(--header-h) + 20px);
+            background: var(--color-card);
+            border-radius: var(--radius-card);
+            padding: 24px 20px;
+            box-shadow: var(--shadow-card);
+            border-left: 4px solid var(--color-teal);
+        }
+
+        .holiday-nav-sticky h2 {
+            font-size: 18px;
+            color: var(--color-ink);
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed rgba(35, 43, 61, .15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .holiday-nav-sticky ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .holiday-nav-sticky a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            color: var(--color-ink-soft);
+            text-decoration: none;
+            border-radius: var(--radius-card);
+            font-size: 14.5px;
+            font-weight: 700;
+            transition: all 0.25s var(--ease);
+        }
+
+        .holiday-nav-sticky a:hover,
+        .holiday-nav-sticky a.active {
+            background: rgba(63, 108, 99, 0.1);
+            color: var(--color-teal-dark);
+            transform: translateX(4px);
+        }
+
+        /* Timeline Main Content */
+        .holiday-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        /* Section Card Styling */
+        .timeline-card {
+            background: var(--color-card);
+            border-radius: var(--radius-card);
+            padding: 32px;
+            box-shadow: var(--shadow-card);
+            transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-card:hover {
+            box-shadow: var(--shadow-card-hover);
+        }
+
+        .timeline-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            padding-bottom: 14px;
+            border-bottom: 2px dashed var(--color-paper-alt);
+        }
+
+        .timeline-card-header h2 {
+            font-size: 22px;
+            color: var(--color-ink);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .timeline-card-header h2 u {
+            text-decoration-color: var(--color-teal);
+            text-underline-offset: 4px;
+        }
+
+        .timeline-badge {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            color: var(--color-stamp-dark);
+            background: rgba(184, 121, 47, 0.12);
+            border: 1px dashed var(--color-stamp);
+            padding: 4px 12px;
+            border-radius: 999px;
+            transform: rotate(-2deg);
+        }
+
+        /* Schedule Item List */
+        .schedule-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+        }
+
+        .schedule-list::before {
+            content: "";
+            position: absolute;
+            left: 78px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: rgba(35, 43, 61, 0.08);
+        }
+
+        .schedule-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            position: relative;
+        }
+
+        .schedule-time {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-teal);
+            background: var(--color-paper);
+            padding: 4px 10px;
+            border-radius: 4px;
+            min-width: 68px;
+            text-align: center;
+            border: 1px solid rgba(63, 108, 99, 0.2);
+            z-index: 1;
+        }
+
+        .schedule-content {
+            flex: 1;
+            font-size: 15px;
+            color: var(--color-ink);
+            padding-top: 3px;
+            line-height: 1.5;
+        }
+
+        mark {
+            background: rgba(184, 121, 47, 0.2);
+            color: var(--color-stamp-dark);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 700;
+        }
+
+        strong {
+            color: var(--color-teal-dark);
+            font-weight: 700;
+        }
+
+        /* Details / Collapsible Element */
+        details.holiday-details {
+            margin-top: 12px;
+            background: var(--color-paper-alt);
+            border-radius: var(--radius-card);
+            padding: 12px 18px;
+            border-left: 3px solid var(--color-stamp);
+        }
+
+        details.holiday-details summary {
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--color-ink);
+            user-select: none;
+            list-style-position: inside;
+        }
+
+        details.holiday-details summary::-webkit-details-marker {
+            color: var(--color-stamp);
+        }
+
+        details.holiday-details p {
+            margin-top: 8px;
+            color: var(--color-ink-soft);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Quote / Quote Block */
+        .holiday-quote-card {
+            background: linear-gradient(135deg, var(--color-paper-alt), var(--color-card));
+            border: 1px solid rgba(35, 43, 61, 0.12);
+            border-left: 5px solid var(--color-terracotta);
+            padding: 28px 32px;
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-card);
+        }
+
+        .holiday-quote-card h2 {
+            font-size: 18px;
+            color: var(--color-ink);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        blockquote {
+            font-family: var(--font-display);
+            font-size: 17px;
+            color: var(--color-ink);
+            font-style: italic;
+            padding-left: 12px;
+            border-left: 2px solid var(--color-stamp);
+            margin-top: 8px;
+        }
+
+        /* Interactive Counter Widget */
+        .interactive-widget {
+            margin-top: 24px;
+            padding: 16px 20px;
+            background: var(--color-paper);
+            border-radius: var(--radius-card);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px dashed rgba(35, 43, 61, 0.15);
+        }
+
+        .interactive-widget span {
+            font-size: 14px;
+            color: var(--color-ink-soft);
+            font-weight: 700;
+        }
+
+        .top-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--color-paper);
+            background: var(--color-ink);
+            padding: 8px 18px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+        }
+
+        .top-link:hover {
+            background: var(--color-teal-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 860px) {
+            .holiday-layout {
+                grid-template-columns: 1fr;
+                padding: 20px 16px 60px;
+                gap: 24px;
+            }
+
+            .holiday-nav-sticky {
+                position: static;
+            }
+
+            .holiday-nav-sticky ul {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .schedule-list::before {
+                left: 65px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .holiday-nav-sticky ul {
+                grid-template-columns: 1fr;
+            }
+
+            .schedule-item {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .schedule-list::before {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
-
-    <header id="top">
-        <h1>&#127968; 나의 휴일 일과</h1>
-        <p>
-            &#127775; 바쁜 일상에서 벗어나 휴식과 자기계발을 즐기는 하루입니다.
-        </p>
+    <div id="top" class="trip-header-gap"></div>
+    <header class="trip-header-container" id="top">
+        <div class="trip-header-text">
+            <p class="trip-eyebrow">HOLIDAY ROUTINE ARCHIVE</p>
+            <h1>&#127968; 나의 휴일 일과</h1>
+            <p class="trip-subtitle">&#127775; 바쁜 일상에서 벗어나 휴식과 자기계발을 즐기는 하루입니다.</p>
+        </div>
+        <audio controls title="휴일 BGM 플레이어" autoplay>
+            <source src="../media/grand_project-wonders-of-the-earth.mp3" type="audio/mpeg">
+            브라우저가 오디오 태그를 지원하지 않습니다.
+        </audio>
     </header>
 
-    <nav title="휴일 일정 바로가기">
-        <h2>&#128279; 바로가기</h2>
-        <ul>
-            <li>
-                <a href="#morning">&#127769; 느긋한 아침</a>
-            </li>
-            <li>
-                <a href="#afternoon">&#127774; 오후 활동</a>
-            </li>
-            <li>
-                <a href="#evening">&#127749; 저녁과 밤</a>
-            </li>
-            <li>
-                <a href="#extra">&#128221; 추가 일정</a>
-            </li>
-        </ul>
-    </nav>
+    <div class="holiday-layout">
+        <nav class="holiday-nav-sticky" title="휴일 일정 바로가기" aria-label="휴일 일정 바로가기">
+            <h2>&#128279; 바로가기</h2>
+            <ul>
+                <li><a href="#morning">&#127769; 느긋한 아침</a></li>
+                <li><a href="#afternoon">&#127774; 오후 활동</a></li>
+                <li><a href="#evening">&#127749; 저녁과 밤</a></li>
+                <li><a href="#extra">&#128221; 추가 일정</a></li>
+            </ul>
+        </nav>
 
-    <main>
+        <main class="holiday-timeline">
 
-        <section id="morning">
-            <h2 title="휴일 오전 일정">&#127769; <u>느긋한 아침</u></h2>
+            <!-- 아침 일정 -->
+            <section id="morning" class="timeline-card">
+                <div class="timeline-card-header">
+                    <h2 title="휴일 오전 일정">&#127769; <u>느긋한 아침</u></h2>
+                    <span class="timeline-badge">MORNING</span>
+                </div>
 
-            <p>09:00 - &#128564; 늦잠 자는 행복</p>
+                <ul class="schedule-list">
+                    <li class="schedule-item">
+                        <time class="schedule-time" datetime="09:00">09:00</time>
+                        <div class="schedule-content">&#128564; 늦잠 자는 행복</div>
+                    </li>
+                    <li class="schedule-item">
+                        <time class="schedule-time" datetime="10:00">10:00</time>
+                        <div class="schedule-content">
+                            여유 있게 <mark>브런치</mark> 즐기기
+                        </div>
+                    </li>
+                    <li class="schedule-item">
+                        <time class="schedule-time" datetime="11:00">11:00</time>
+                        <div class="schedule-content">
+                            <strong>커피 한 잔</strong>과 음악 감상
+                        </div>
+                    </li>
+                </ul>
 
-            <p>
-                10:00 - 여유 있게 
-                <mark>브런치</mark> 즐기기
-            </p>
+                <details class="holiday-details">
+                    <summary>&#9749; 아침 휴식 이야기</summary>
+                    <p>좋아하는 음악을 들으며 천천히 하루를 시작합니다.</p>
+                </details>
+            </section>
 
-            <p>
-                11:00 - 
-                <strong>커피 한 잔</strong>과 음악 감상
-            </p>
+            <!-- 오후 일정 -->
+            <section id="afternoon" class="timeline-card">
+                <div class="timeline-card-header">
+                    <h2 title="휴일 오후 일정">&#127774; <u>오후 활동</u></h2>
+                    <span class="timeline-badge">AFTERNOON</span>
+                </div>
 
-            <details>
-                <summary>&#9749; 아침 휴식 이야기</summary>
-                <p>
-                    좋아하는 음악을 들으며 천천히 하루를 시작합니다.
-                </p>
-            </details>
+                <ul class="schedule-list">
+                    <li class="schedule-item">
+                        <time class="schedule-time" datetime="13:00">13:00</time>
+                        <div class="schedule-content">공원 산책하며 <strong>마음 정리</strong></div>
+                    </li>
+                    <li class="schedule-item">
+                        <time class="schedule-time" datetime="14:30">14:30</time>
+                        <div class="schedule-content">사진 찍으며 <strong>일상의 순간 기록</strong></div>
+                    </li>
+                    <li class="schedule-item">
+                        <time class="schedule-time" datetime="16:00">16:00</time>
+                        <div class="schedule-content">충동구매 대신 <mark>창의적인 쇼핑</mark></div>
+                    </li>
+                    <li class="schedule-item">
+                        <time class="schedule-time" datetime="17:30">17:30</time>
+                        <div class="schedule-content">&#128247; 새로운 장소 탐방 및 사진 정리</div>
+                    </li>
+                </ul>
+            </section>
 
-        </section>
+            <!-- 저녁과 밤 일정 -->
+            <section id="evening" class="timeline-card">
+                <div class="timeline-card-header">
+                    <h2 title="휴일 저녁 일정">&#127749; <u>저녁과 밤</u></h2>
+                    <span class="timeline-badge">EVENING</span>
+                </div>
 
+                <ul class="schedule-list">
+                    <li class="schedule-item">
+                        <time class="schedule-time" datetime="18:00">18:00</time>
+                        <div class="schedule-content"><strong>맛있는 저녁</strong> 만들기</div>
+                    </li>
+                    <li class="schedule-item">
+                        <time class="schedule-time" datetime="20:00">20:00</time>
+                        <div class="schedule-content">&#127909; 영화 감상(코미디 추천)</div>
+                    </li>
+                    <li class="schedule-item">
+                        <time class="schedule-time" datetime="21:30">21:30</time>
+                        <div class="schedule-content">&#127911; 좋아하는 음악 감상</div>
+                    </li>
+                    <li class="schedule-item">
+                        <time class="schedule-time" datetime="23:00">23:00</time>
+                        <div class="schedule-content">&#128214; 짧은 독서 후 힐링 타임</div>
+                    </li>
+                </ul>
+            </section>
 
-        <section id="afternoon">
-            <h2 title="휴일 오후 일정">&#127774; <u>오후 활동</u></h2>
+            <!-- 추가 일정 -->
+            <section id="extra" class="timeline-card">
+                <div class="timeline-card-header">
+                    <h2>&#128221; 추가 일정</h2>
+                    <span class="timeline-badge">EXTRA</span>
+                </div>
 
-            <p>
-                13:00 - 공원 산책하며 
-                <strong>마음 정리</strong>
-            </p>
+                <ul class="schedule-list">
+                    <li class="schedule-item">
+                        <time class="schedule-time" datetime="08:30">08:30</time>
+                        <div class="schedule-content">&#128197; 하루 계획 확인하기</div>
+                    </li>
+                    <li class="schedule-item">
+                        <time class="schedule-time" datetime="12:30">12:30</time>
+                        <div class="schedule-content">&#127860; 가족 또는 친구와 점심 대화</div>
+                    </li>
+                    <li class="schedule-item">
+                        <time class="schedule-time" datetime="15:00">15:00</time>
+                        <div class="schedule-content">&#128187; 관심 분야 공부하기</div>
+                    </li>
+                    <li class="schedule-item">
+                        <time class="schedule-time" datetime="19:30">19:30</time>
+                        <div class="schedule-content">&#128221; 하루 기록 작성하기</div>
+                    </li>
+                    <li class="schedule-item">
+                        <time class="schedule-time" datetime="22:30">22:30</time>
+                        <div class="schedule-content">&#127769; 내일 준비 및 휴식</div>
+                    </li>
+                </ul>
+            </section>
 
-            <p>
-                14:30 - 사진 찍으며 
-                <strong>일상의 순간 기록</strong>
-            </p>
+            <!-- 휴일 한 줄 기록 -->
+            <section class="holiday-quote-card">
+                <h2>&#128172; 휴일 한 줄 기록</h2>
+                <blockquote title="휴일의 의미">
+                    작은 휴식이 모여 <mark>더 좋은 하루</mark>를 만듭니다.
+                </blockquote>
 
-            <p>
-                16:00 - 충동구매 대신 
-                <mark>창의적인 쇼핑</mark>
-            </p>
+                <div class="interactive-widget">
+                    <span>&#128077; 오늘 하루의 힐링 지수를 기록해보세요!</span>
+                    <button class="btn btn-small btn--primary" id="likeBtn" type="button">
+                        &#10084;&#65039; 힐링 스탬프 <span id="likeCount">0</span>
+                    </button>
+                </div>
+            </section>
 
-            <p>
-                17:30 - &#128247; 새로운 장소 탐방 및 사진 정리
-            </p>
+        </main>
 
-        </section>
+    </div>
 
-
-        <section id="evening">
-            <h2 title="휴일 저녁 일정">&#127749; <u>저녁과 밤</u></h2>
-
-            <p>
-                18:00 - 
-                <strong>맛있는 저녁</strong> 만들기
-            </p>
-
-            <p>
-                20:00 - &#127909; 영화 감상(코미디 추천)
-            </p>
-
-            <p>
-                21:30 - &#127911; 좋아하는 음악 감상
-            </p>
-
-            <p>
-                23:00 - &#128214; 짧은 독서 후 힐링 타임
-            </p>
-
-        </section>
-
-
-        <section id="extra">
-            <h2>&#128221; 추가 일정</h2>
-
-            <p>
-                08:30 - &#128197; 하루 계획 확인하기
-            </p>
-
-            <p>
-                12:30 - &#127860; 가족 또는 친구와 점심 대화
-            </p>
-
-            <p>
-                15:00 - &#128187; 관심 분야 공부하기
-            </p>
-
-            <p>
-                19:30 - &#128221; 하루 기록 작성하기
-            </p>
-
-            <p>
-                22:30 - &#127769; 내일 준비 및 휴식
-            </p>
-
-        </section>
-
-
-        <section>
-            <h2>&#128172; 휴일 한 줄 기록</h2>
-
-            <blockquote title="휴일의 의미">
-                작은 휴식이 모여 <mark>  더 좋은 하루</mark>를 만듭니다.
-            </blockquote>
-
-        </section>
-
-
-    </main>
-
-
-    <footer>
-        <p>
-            &#128197;
-            휴일 버전 작성일:
-            <time datetime="2026-05">2026년 5월</time>
+    <footer class="site-footer">
+        <p style="margin-bottom: 12px;">
+            &#128197; 휴일 버전 작성일: <time datetime="2026-05">2026년 5월</time>
         </p>
-
         <p>
-            <a href="#top">&#11014; 맨 위로 이동</a>
+            <a href="#top" class="top-link">&#11014; 맨 위로 이동</a>
         </p>
     </footer>
 
+    <div id="summer-canvas-anchor"></div>
+    <script src="../script/summer-canvas.js"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 스탬프 인터랙션
+            const likeBtn = document.getElementById('likeBtn');
+            const likeCount = document.getElementById('likeCount');
+            let count = 0;
+
+            if (likeBtn && likeCount) {
+                likeBtn.addEventListener('click', () => {
+                    count++;
+                    likeCount.textContent = count;
+                    likeBtn.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        likeBtn.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            }
+
+            // 스크롤 시 메뉴 하이라이트
+            const navLinks = document.querySelectorAll('.holiday-nav-sticky a');
+            const sections = document.querySelectorAll('.timeline-card');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= (sectionTop - 150)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
+
 </html>

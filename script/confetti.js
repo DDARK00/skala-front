@@ -23,40 +23,40 @@ const confetti = (() => {
 
     class Piece {
 
-constructor(x, y) {
+        constructor(x, y) {
 
-    this.x = x;
-    this.y = y;
+            this.x = x;
+            this.y = y;
 
-    this.vx = (Math.random() - 0.5) * 2;
+            this.vx = (Math.random() - 0.5) * 2;
 
-    this.vy = Math.random() * 2 + 2;
+            this.vy = Math.random() * 2 + 2;
 
-    this.width = 5 + Math.random() * 5;
-    this.height = 8 + Math.random() * 6;
+            this.width = 5 + Math.random() * 5;
+            this.height = 8 + Math.random() * 6;
 
-    this.rotation = Math.random() * Math.PI * 2;
-    this.rotationSpeed = (Math.random() - 0.5) * 0.2;
+            this.rotation = Math.random() * Math.PI * 2;
+            this.rotationSpeed = (Math.random() - 0.5) * 0.2;
 
-    this.swing = Math.random() * Math.PI * 2;
+            this.swing = Math.random() * Math.PI * 2;
 
-    this.alpha = 1;
+            this.alpha = 1;
 
-    this.color =
-        `hsl(${Math.random()*360},85%,60%)`;
-}
+            this.color =
+                `hsl(${Math.random() * 360},85%,60%)`;
+        }
 
         update() {
 
-    this.swing += 0.08;
+            this.swing += 0.08;
 
-    this.x += this.vx + Math.sin(this.swing) * 0.8;
+            this.x += this.vx + Math.sin(this.swing) * 0.8;
 
-    this.y += this.vy;
+            this.y += this.vy;
 
-    this.rotation += this.rotationSpeed;
+            this.rotation += this.rotationSpeed;
 
-}
+        }
         draw(ctx) {
 
             ctx.save();
@@ -79,11 +79,11 @@ constructor(x, y) {
             ctx.restore();
         }
 
-get dead() {
+        get dead() {
 
-    return this.y > height + 40;
+            return this.y > height + 40;
 
-}
+        }
 
     }
 
@@ -145,34 +145,34 @@ get dead() {
 
     function launch() {
 
-    if (!canvas)
-        mount();
+        if (!canvas)
+            mount();
 
-    const duration = 3000;
-    const interval = 80;
+        const duration = 3000;
+        const interval = 80;
 
-    const timer = setInterval(() => {
+        const timer = setInterval(() => {
 
-        for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 6; i++) {
 
-            pieces.push(
-                new Piece(
-                    Math.random() * width,
-                    -20
-                )
-            );
+                pieces.push(
+                    new Piece(
+                        Math.random() * width,
+                        -20
+                    )
+                );
 
-        }
+            }
 
-    }, interval);
+        }, interval);
 
-    setTimeout(() => {
+        setTimeout(() => {
 
-        clearInterval(timer);
+            clearInterval(timer);
 
-    }, duration);
+        }, duration);
 
-}
+    }
 
     function destroy() {
 
