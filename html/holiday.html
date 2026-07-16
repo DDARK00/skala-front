@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>나의 휴일 일과 - Holiday Daily Routine</title>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="../script/confetti.js"></script>
     <style>
         /* ==================================================
            Holiday Page Custom Styles (Integrating with Common CSS)
@@ -326,7 +327,10 @@
     <div id="top" class="trip-header-gap"></div>
     <header class="trip-header-container" id="top">
         <div class="trip-header-text">
-            <p class="trip-eyebrow">HOLIDAY ROUTINE ARCHIVE</p>
+            <p class="trip-eyebrow">
+                <a href="index.html"> &lt;Home&gt;</a>
+                HOLIDAY ROUTINE ARCHIVE
+            </p>
             <h1>&#127968; 나의 휴일 일과</h1>
             <p class="trip-subtitle">&#127775; 바쁜 일상에서 벗어나 휴식과 자기계발을 즐기는 하루입니다.</p>
         </div>
@@ -498,6 +502,8 @@
     <script src="../script/summer-canvas.js"></script>
 
     <script>
+        confetti.mount()
+
         document.addEventListener('DOMContentLoaded', () => {
             // 스탬프 인터랙션
             const likeBtn = document.getElementById('likeBtn');
@@ -506,6 +512,9 @@
 
             if (likeBtn && likeCount) {
                 likeBtn.addEventListener('click', () => {
+                    confetti.launch({
+                        count: 10
+                    })
                     count++;
                     likeCount.textContent = count;
                     likeBtn.style.transform = 'scale(1.1)';
