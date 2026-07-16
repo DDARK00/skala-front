@@ -1,0 +1,559 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Nanum+Myeongjo:wght@400;700&family=Special+Elite&display=swap");
+
+/* ==================================================
+   토큰
+   ================================================== */
+:root {
+    --color-paper: #f6f1e6;
+    --color-paper-alt: #efe6d3;
+    --color-card: #fffdf8;
+    --color-ink: #232b3d;
+    --color-ink-soft: #5b6474;
+    --color-teal: #3f6c63;
+    --color-teal-dark: #2b4b45;
+    --color-stamp: #b8792f;
+    --color-stamp-dark: #8f5c1f;
+
+    --font-display: "Nanum Myeongjo", serif;
+    --font-body: "Nanum Gothic", sans-serif;
+    --font-mono: "Special Elite", "Courier New", monospace;
+
+    --radius-card: 6px;
+    --shadow-card: 0 10px 26px rgba(35, 43, 61, .12);
+    --shadow-card-hover: 0 18px 34px rgba(35, 43, 61, .18);
+    --ease: cubic-bezier(.22, .61, .36, 1);
+
+    /* 헤더 실제 높이 (JS가 ResizeObserver로 갱신, 초기값은 대략치) */
+    --header-h: 96px;
+}
+
+/* ---------------- 스크롤바 ---------------- */
+
+html {
+    scrollbar-color: var(--color-teal) var(--color-paper);
+    scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-paper);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-teal);
+    border-radius: 999px;
+    border: 3px solid var(--color-paper);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-teal-dark);
+}
+
+.trip-detail {
+    scrollbar-color: var(--color-teal) var(--color-paper-alt);
+}
+
+.trip-detail::-webkit-scrollbar-track {
+    background: var(--color-paper-alt);
+}
+
+.trip-detail::-webkit-scrollbar-thumb {
+    border-color: var(--color-paper-alt);
+}
+
+/* ==================================================
+   기본 바탕 및 글꼴
+   ================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    background:
+        radial-gradient(circle at 1px 1px, rgba(35, 43, 61, .05) 1px, transparent 0) 0 0 / 22px 22px,
+        var(--color-paper);
+    color: var(--color-ink);
+    line-height: 1.6;
+}
+
+h1, h2 {
+    font-family: var(--font-display);
+}
+
+a {
+    color: var(--color-teal-dark);
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+/* ---------------- HEADER ---------------- */
+
+.trip-header-gap {
+    background: var(--color-card);
+    height: 10px;
+}
+
+.trip-header-container {
+    box-shadow: 0 2px 18px rgba(35, 43, 61, .12);
+    background: var(--color-card);
+    padding: 20px 28px 22px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid rgba(35, 43, 61, .08);
+}
+
+.trip-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    color: var(--color-teal);
+    margin-bottom: 6px;
+}
+
+.trip-header-text h1 {
+    font-size: 30px;
+    color: var(--color-ink);
+}
+
+.trip-subtitle {
+    margin-top: 6px;
+    color: var(--color-ink-soft);
+    font-size: 14px;
+}
+
+audio {
+    height: 36px;
+    max-width: 44vw;
+    accent-color: var(--color-teal);
+}
+
+/* ---------------- MAIN ---------------- */
+
+.trip-container {
+    position: relative;
+    padding: 10px;
+}
+
+/* ---------------- DETAIL ---------------- */
+
+.trip-detail {
+    position: fixed;
+    left: -100%;
+    top: var(--header-h);
+    width: 68%;
+    height: calc(100vh - var(--header-h));
+    overflow: auto;
+    overflow-x: hidden;
+    background: var(--color-paper-alt);
+    border-right: 6px solid var(--color-teal);
+    transition: left .55s var(--ease);
+    padding: 48px 56px;
+    box-shadow: 12px 0 30px rgba(35, 43, 61, .18);
+    z-index: 500;
+}
+
+.trip-detail-stamp {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 96px;
+    color: var(--color-ink);
+    opacity: .06;
+    transform: rotate(12deg);
+    pointer-events: none;
+}
+
+.trip-detail-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .14em;
+    color: var(--color-stamp-dark);
+    margin-bottom: 10px;
+}
+
+.trip-detail h2.trip-name {
+    font-size: 30px;
+    margin-bottom: 22px;
+    max-width: 90%;
+}
+
+/* ---------------- 홀로그램 여권 씰 이미지 효과 ---------------- */
+
+.trip-img-frame {
+    --rx: 0deg;
+    --ry: 0deg;
+    --mx: 50%;
+    --my: 50%;
+    --holo-opacity: 0;
+    --holo-scale: 1;
+    position: relative;
+    perspective: 900px;
+    margin-bottom: 30px;
+    border-radius: var(--radius-card);
+    border: 8px solid var(--color-card);
+    box-shadow: 0 14px 30px rgba(35, 43, 61, .2);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.trip-detail img.trip-img {
+    width: 100%;
+    height: 62vh;
+    max-height: 560px;
+    object-fit: cover;
+    display: block;
+    transform: rotateX(var(--ry)) rotateY(var(--rx)) scale3d(var(--holo-scale), var(--holo-scale), 1);
+    transform-style: preserve-3d;
+    transition: transform .12s ease-out;
+    will-change: transform;
+}
+
+/* 손끝을 따라오는 유리 광택 */
+.trip-img-frame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: radial-gradient(circle at var(--mx) var(--my), rgba(255, 255, 255, .8), transparent 45%);
+    opacity: var(--holo-opacity);
+    transition: opacity .3s ease;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+}
+
+/* 각도에 따라 색이 바뀌는 보안 씰 홀로그램 */
+.trip-img-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: repeating-linear-gradient(115deg,
+            rgba(63, 108, 99, .6) 0%,
+            rgba(184, 121, 47, .6) 12%,
+            rgba(246, 241, 230, .55) 24%,
+            rgba(196, 92, 78, .55) 36%,
+            rgba(63, 108, 99, .6) 48%);
+    background-size: 250% 250%;
+    background-position: var(--mx) var(--my);
+    mix-blend-mode: color-dodge;
+    opacity: calc(var(--holo-opacity) * .5);
+    transition: opacity .3s ease;
+    pointer-events: none;
+}
+
+.trip-img-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    z-index: 4;
+    background: rgba(35, 43, 61, .55);
+    color: var(--color-paper);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .04em;
+    padding: 6px 14px;
+    border-radius: 999px;
+    opacity: 1;
+    transition: opacity .3s ease;
+    pointer-events: none;
+}
+
+.trip-img-frame:hover .trip-img-hint {
+    opacity: 0;
+}
+
+@media (hover: none) {
+    .trip-img-hint {
+        display: none;
+    }
+}
+
+.trip-desc {
+    max-width: 68ch;
+    color: var(--color-ink-soft);
+}
+
+.trip-close {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 30px;
+    text-decoration: none;
+    color: var(--color-card);
+    background: var(--color-ink);
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 14px;
+    letter-spacing: .02em;
+    transition: background .25s var(--ease), transform .25s var(--ease);
+}
+
+.trip-close:hover {
+    background: var(--color-teal-dark);
+    transform: translateX(-3px);
+}
+
+/* ---------------- ALBUM ---------------- */
+
+.trip-album {
+    padding: 46px 6px 10px;
+}
+
+.trip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 44px;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.trip-card {
+    background: var(--color-card);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease), outline-color .25s var(--ease);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(24px) rotate(var(--tilt, 0deg));
+    outline: 2px solid transparent;
+    outline-offset: 4px;
+}
+
+.trip-card:nth-child(odd) {
+    --tilt: -.6deg;
+}
+
+.trip-card:nth-child(even) {
+    --tilt: .6deg;
+}
+
+.trip-card--visible {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--tilt, 0deg));
+    transition: opacity .6s var(--ease), transform .6s var(--ease);
+}
+
+.trip-card:hover,
+.trip-card:focus-within {
+    transform: translateY(-6px) rotate(0deg);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.trip-card.is-active {
+    outline-color: var(--color-teal);
+}
+
+.trip-card-link {
+    display: block;
+    color: var(--color-ink);
+    text-decoration: none;
+}
+
+.trip-card-figure {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+}
+
+.trip-card-figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .5s var(--ease);
+}
+
+.trip-card:hover .trip-card-figure img {
+    transform: scale(1.06);
+}
+
+.trip-card-stamp {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .05em;
+    color: var(--color-stamp-dark);
+    background: rgba(255, 253, 248, .92);
+    border: 1px dashed var(--color-stamp);
+    border-radius: 999px;
+    padding: 5px 12px;
+    transform: rotate(-6deg);
+}
+
+.trip-card h2 {
+    padding: 20px 20px 6px;
+    font-size: 20px;
+}
+
+.trip-card p {
+    padding: 0 20px 22px;
+    color: var(--color-ink-soft);
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.trip-card > small {
+    display: block;
+    padding: 0 20px 18px;
+    color: var(--color-ink-soft);
+    opacity: .6;
+    font-size: 11px;
+}
+
+/* ---------- 확대모드 ---------- */
+
+#trip-detail:target {
+    left: 0;
+}
+
+#trip-detail:target ~ .trip-album {
+    margin-left: 68%;
+    width: 32%;
+}
+
+#trip-detail:target ~ .trip-album .trip-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+/* ---------------- VLOG ---------------- */
+
+footer {
+    margin-top: 60px;
+}
+
+.vlog {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    padding: 70px 8vw;
+    display: grid;
+    grid-template-columns: minmax(220px, 320px) 1fr;
+    align-items: center;
+    gap: 50px;
+}
+
+.vlog-intro .trip-eyebrow {
+    color: var(--color-stamp);
+}
+
+.vlog-intro h2 {
+    margin: 10px 0 16px;
+    font-size: 28px;
+    color: var(--color-paper);
+}
+
+.vlog-desc {
+    color: rgba(246, 241, 230, .78);
+    margin-bottom: 20px;
+}
+
+.vlog-credit {
+    display: block;
+    color: rgba(246, 241, 230, .5);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .04em;
+}
+
+.vlog-frame {
+    position: relative;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    border: 1px solid rgba(246, 241, 230, .14);
+    box-shadow: 0 24px 55px rgba(0, 0, 0, .45);
+}
+
+video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    display: block;
+    border-radius: 0;
+    box-shadow: none;
+    background: #000;
+}
+
+@media (max-width: 720px) {
+    .vlog {
+        grid-template-columns: 1fr;
+        padding: 50px 24px;
+        text-align: left;
+    }
+
+    .vlog-frame {
+        order: -1;
+    }
+}
+
+/* ---------------- 반응형 ---------------- */
+
+@media (max-width: 860px) {
+    .trip-header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    audio {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .trip-detail {
+        width: 100%;
+        left: -100%;
+        padding: 34px 22px;
+        border-right: none;
+        border-bottom: 6px solid var(--color-teal);
+    }
+
+    .trip-detail img.trip-img {
+        height: 46vh;
+    }
+
+    #trip-detail:target ~ .trip-album {
+        display: none;
+    }
+
+    .trip-grid {
+        gap: 30px;
+    }
+}
+
+/* ---------------- 모션 최소화 ---------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition-duration: .001ms !important;
+        animation-duration: .001ms !important;
+    }
+
+    .trip-card {
+        opacity: 1;
+        transform: none;
+    }
+}

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>My Travel Album</title>
+</head>
+
+<body>
+    <div class="trip-header-gap"> </div>
+    <header class="trip-header-container">
+        <div class="trip-header-text">
+            <p class="trip-eyebrow">
+                <a href="index.html"> &lt;Home&gt;</a>
+                TRAVEL LOG · 2026</p>
+            <h1>📸 Summer Travel</h1>
+            <p class="trip-subtitle">여름, 세 나라를 걷다</p>
+        </div>
+        <audio autoplay loop controls>
+            <source src="../media/grand_project-wonders-of-the-earth.mp3" type="audio/mpeg">
+            브라우저가 audio를 지원하지 않습니다.
+        </audio>
+    </header>
+
+    <main id="content" class="trip-container open">
+        <!-- ================= 상세 페이지 ================= -->
+        <section id="trip-detail" class="trip-detail" aria-hidden="true" aria-label="여행지 상세 정보">
+            <a href="#" class="trip-close">← 앨범으로</a>
+            <span class="trip-detail-stamp" aria-hidden="true">✈</span>
+            <p class="trip-detail-eyebrow">TRAVEL LOG</p>
+            <h2 class="trip-name"></h2>
+            <div class="trip-img-frame">
+                <img class="trip-img" src="" alt="">
+                <span class="trip-img-hint" aria-hidden="true">✨ 사진 위에 마우스를 올려보세요</span>
+            </div>
+            <p class="trip-desc"></p>
+        </section>
+
+        <!-- ================= 앨범 ================= -->
+        <section class="trip-album" aria-label="여행 앨범">
+            <div class="trip-grid" id="trip-grid">
+                <!-- .trip-card 요소는 JS로 생성됩니다 -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <section class="vlog" aria-label="여행 브이로그">
+            <div class="vlog-intro">
+                <p class="trip-eyebrow">TRAVEL LOG · FILM</p>
+                <h2>🎬 Travel Vlog</h2>
+                <p class="vlog-desc">베트남 닌빈의 산 속 고대 사원을 느껴보세요!</p>
+                <small class="vlog-credit">produced by videomaker.me</small>
+            </div>
+            <div class="vlog-frame">
+                <video controls preload="metadata" poster="../media/lukas-konvica.jpg">
+                    <source src="../media/videomaker_watermarked.mp4" type="video/mp4">
+                    브라우저가 video를 지원하지 않습니다.
+                </video>
+            </div>
+        </section>
+    </footer>
+
+    <script>
+        const grid = document.querySelector("#trip-grid");
+        const detail = document.querySelector("#trip-detail");
+        const detailClose = detail.querySelector(".trip-close");
+        const detailName = detail.querySelector(".trip-name");
+        const detailImgFrame = detail.querySelector(".trip-img-frame");
+        const detailImg = detail.querySelector(".trip-img");
+        const detailDesc = detail.querySelector(".trip-desc");
+
+        // ---------- 헤더 실제 높이를 추적해 상세 패널이 헤더에 가리지 않도록 동기화 ----------
+        const header = document.querySelector(".trip-header-container");
+
+        function syncHeaderOffset() {
+            document.documentElement.style.setProperty("--header-h", header.offsetHeight + "px");
+        }
+        syncHeaderOffset();
+        window.addEventListener("resize", syncHeaderOffset);
+        if ("ResizeObserver" in window) {
+            new ResizeObserver(syncHeaderOffset).observe(header);
+        }
+
+        const contentSrc = [{
+            name: "아테네 경관",
+            desc: "눈에 띄는 언덕이 있는 아테네 도시 경관.\n초상, 사람, 건축학 및 구름을(를) 촬영한 Athens, Greece에 있는 Anastase Maragos.",
+            alt: "눈에 띄는 언덕이 있는 아테네 경관",
+            src: "../media/anastase-maragos.jpg",
+            source: "사진 출처 : Unsplash의 Anastase Maragos",
+            highlights: { food: "수블라키", time: "노을 지는 저녁", point: "파르테논 신전 야경" }
+        },
+        {
+            name: "튀르키예의 아디야만",
+            desc: "산에 있는 고대 조각상과 영묘.\n파랑, 보라색 및 넴루트 산을(를) 촬영한 Türkiye에 있는 Yunus Tuğ (@yunustug)의 이 무료 HD 사진.",
+            alt: "산에 있는 고대 조각상과 영묘",
+            src: "../media/yunus-tug.jpg",
+            source: "사진 출처 : Unsplash의 Yunus Tuğ",
+            highlights: { food: "케밥", time: "일출 직전 새벽", point: "거대한 석상과 능묘" }
+        },
+        {
+            name: "베트남 닌빈",
+            desc: "빨간 옷을 입은 사람이 울창한 산 속 고대 사원으로 걸어간다.",
+            alt: "빨간 옷을 입은 사람이 울창한 산 속 고대 사원으로 걸어간다.",
+            src: "../media/lukas-konvica.jpg",
+            source: "사진 출처 : Unsplash의 Lukáš Konvica",
+            highlights: { food: "쌀국수(퍼)", time: "물안개 낀 이른 아침", point: "산 속 사원 트레킹" }
+        }];
+
+        // ---------- 앨범 카드 생성 ----------
+        contentSrc.forEach((item, idx) => {
+            const article = document.createElement("article");
+            article.className = "trip-card";
+            article.id = "article-" + idx;
+            article.style.setProperty("--card-index", idx);
+
+            const a = document.createElement("a");
+            a.href = "#trip-detail";
+            a.className = "trip-card-link";
+
+            const figure = document.createElement("div");
+            figure.className = "trip-card-figure";
+
+            const img = document.createElement("img");
+            img.src = item.src;
+            img.alt = item.alt;
+            img.loading = "lazy";
+
+            const stamp = document.createElement("span");
+            stamp.className = "trip-card-stamp";
+            stamp.setAttribute("aria-hidden", "true");
+            stamp.textContent = "NO. " + String(idx + 1).padStart(2, "0");
+
+            figure.appendChild(img);
+            figure.appendChild(stamp);
+
+            const h2 = document.createElement("h2");
+            h2.textContent = item.name;
+
+            const p = document.createElement("p");
+            p.className = "trip-card-desc";
+            p.textContent = item.desc.replace(/\n/g, " ");
+
+            const small = document.createElement("small");
+            small.textContent = item.source;
+
+            a.appendChild(figure);
+            a.appendChild(h2);
+            a.appendChild(p);
+
+            article.appendChild(a);
+            article.appendChild(small);
+
+            article.addEventListener("click", () => openDetail(idx));
+
+            grid.appendChild(article);
+        });
+
+        // ---------- 상세 패널 갱신 ----------
+        function openDetail(idx) {
+            const item = contentSrc[idx];
+            detailName.textContent = item.name;
+            detailImg.src = item.src;
+            detailImg.alt = item.alt;
+            detailDesc.innerHTML =
+                item.desc.replace(/\n/g, "<br>") +
+                "<br><br>" +
+                "✔ 추천 음식 : " + item.highlights.food + "<br>" +
+                "✔ 추천 시간 : " + item.highlights.time + "<br>" +
+                "✔ 추천 포인트 : " + item.highlights.point;
+            detailClose.href = "#" + "article-" + idx;
+        }
+
+        // 초기 패널 내용을 첫 번째 여행지로 미리 채워둔다 (빈 상태 방지)
+        openDetail(0);
+
+        // ---------- 해시 변화에 따른 열림/닫힘 상태 동기화 ----------
+        function syncDetailState() {
+            const isOpen = location.hash === "#trip-detail";
+            detail.setAttribute("aria-hidden", String(!isOpen));
+
+            document.querySelectorAll(".trip-card").forEach(card => card.classList.remove("is-active"));
+
+            if (isOpen) {
+                const activeId = detailClose.getAttribute("href").replace("#", "");
+                const targetCard = document.getElementById(activeId) || document.querySelector(".trip-card");
+                targetCard?.classList.add("is-active");
+                detailClose.focus();
+            }
+        }
+        window.addEventListener("hashchange", syncDetailState);
+
+        // ---------- Esc 키로 상세 패널 닫기 ----------
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && location.hash === "#trip-detail") {
+                location.hash = detailClose.getAttribute("href") || "#";
+            }
+        });
+
+        // ---------- 스크롤 시 카드 등장 애니메이션 ----------
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("trip-card--visible");
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll(".trip-card").forEach(card => revealObserver.observe(card));
+
+        // ---------- 상세 사진 홀로그램(여권 보안 씰) 틸트 효과 ----------
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const supportsHover = window.matchMedia("(hover: hover)").matches;
+
+        if (!prefersReducedMotion && supportsHover && detailImgFrame) {
+            const updateTilt = (e) => {
+                const rect = detailImgFrame.getBoundingClientRect();
+                const px = (e.clientX - rect.left) / rect.width;
+                const py = (e.clientY - rect.top) / rect.height;
+                const rx = (0.5 - py) * 16;
+                const ry = (px - 0.5) * 20;
+
+                detailImgFrame.style.setProperty("--rx", rx.toFixed(2) + "deg");
+                detailImgFrame.style.setProperty("--ry", ry.toFixed(2) + "deg");
+                detailImgFrame.style.setProperty("--mx", (px * 100).toFixed(1) + "%");
+                detailImgFrame.style.setProperty("--my", (py * 100).toFixed(1) + "%");
+                detailImgFrame.style.setProperty("--holo-opacity", "1");
+            };
+
+            const resetTilt = () => {
+                detailImgFrame.style.setProperty("--rx", "0deg");
+                detailImgFrame.style.setProperty("--ry", "0deg");
+                detailImgFrame.style.setProperty("--holo-opacity", "0");
+            };
+
+            detailImgFrame.addEventListener("pointermove", updateTilt);
+            detailImgFrame.addEventListener("pointerleave", resetTilt);
+            detailImgFrame.addEventListener("pointerdown", () => {
+                detailImgFrame.style.setProperty("--holo-scale", "1.03");
+            });
+            detailImgFrame.addEventListener("pointerup", () => {
+                detailImgFrame.style.setProperty("--holo-scale", "1");
+            });
+        }
+    </script>
+</body>
+
+</html>

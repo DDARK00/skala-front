@@ -1,0 +1,169 @@
+        @import url(https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap);
+
+        /* 기본 바탕 및 글꼴 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Nanum Gothic", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        h1 {
+            border: 2;
+        }
+
+        /* ---------------- HEADER ---------------- */
+
+        .trip-header-gap {
+            background: white;
+            height: 10px;
+        }
+
+        .trip-header-container {
+            box-shadow: 0 2px 15px rgba(0, 0, 0, .15);
+            background: white;
+            padding: 18px;
+            padding-bottom: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .trip-header-container div h1 {
+            font-size: 32px;
+        }
+
+        .trip-header div p {
+            margin-top: 5px;
+            color: #777;
+        }
+
+        /* ---------------- MAIN ---------------- */
+
+        .trip-container {
+            position: relative;
+            padding: 10px;
+        }
+
+        /* ---------------- DETAIL ---------------- */
+
+        .trip-detail {
+            position: fixed;
+            left: -70%;
+            top: 82px;
+            width: 70%;
+            height: calc(100vh - 82px);
+            overflow: auto;
+            background: white;
+            transition: .5s;
+            padding: 40px;
+            box-shadow: 8px 0 20px rgba(0, 0, 0, .15);
+            z-index: 500;
+        }
+
+        .trip-detail h2 {
+            margin-bottom: 20px;
+        }
+
+        .trip-detail img {
+            width: 100%;
+            height: 700px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .trip-close {
+            display: inline-block;
+            margin-bottom: 25px;
+            text-decoration: none;
+            color: white;
+            background: #333;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        /* ---------------- ALBUM ---------------- */
+
+        .trip-album {
+            transition: .5s;
+            padding: 50px;
+        }
+
+        .trip-card {
+            width: 100%;
+            padding: 10px 20px;
+            margin-bottom: 60px;
+            border-radius: 15px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .12);
+        }
+
+        .trip-card a {
+            display: block;
+            color: black;
+            text-decoration: none;
+        }
+
+        .trip-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .trip-card h2 {
+            padding: 20px;
+        }
+
+        .trip-card p {
+            padding: 0 20px 20px;
+            color: #666;
+        }
+
+        /* ---------- 확대모드 ---------- */
+
+        #trip-detail:target {
+            left: 0;
+        }
+
+        #trip-detail:target~.trip-album {
+            margin-left: 70%;
+            width: 30%;
+        }
+
+        /* ---------------- VLOG ---------------- */
+
+        footer {
+            margin-top: 80px;
+        }
+
+        .vlog {
+            background: white;
+            padding: 50px;
+        }
+
+        .vlog h2 {
+            margin-bottom: 25px;
+        }
+
+        video {
+            height: 100%;
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .vlog p, .vlog small {
+            margin : 15px;
+        }
