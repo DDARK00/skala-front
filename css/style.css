@@ -1039,6 +1039,17 @@ input[type="radio"] {
     color: var(--color-ink);
 }
 
+.btn-small {
+    appearance: none;
+    border: 1;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+
 @media (max-width: 640px) {
     .form-card {
         padding: 4px 18px 24px;
