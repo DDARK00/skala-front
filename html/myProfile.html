@@ -213,15 +213,20 @@
 <body>
     <div id="top"></div>
     <!-- 상단 헤더 -->
+    <div id="top" class="trip-header-gap"></div>
     <header class="trip-header-container">
         <div class="trip-header-text">
             <p class="trip-eyebrow">
-                <a href="index.html"> &lt;Home&gt;</a>
+                <a href="index.html"> &lt;Home&gt;</a> <br>
                 ABOUT ME & PROFILE
             </p>
             <h1>👋 안녕하세요! 저를 소개합니다</h1>
             <p class="trip-subtitle">📝 제가 좋아하는 것들, 올해의 계획, 그리고 저의 성장을 기록하는 공간입니다.</p>
         </div>
+        <audio controls title="휴일 BGM 플레이어" autoplay>
+            <source src="../media/grand_project-wonders-of-the-earth.mp3" type="audio/mpeg">
+            브라우저가 오디오 태그를 지원하지 않습니다.
+        </audio>
     </header>
 
     <!-- 내비게이션 바 (Flexbox 적용) -->
@@ -360,8 +365,9 @@
                     </p>
 
                     <p style="font-size: 14px; color: var(--color-ink-soft);">🐙 GitHub: github.com/DDARK00
-                        <button class="btn-small btn--ghost" onclick="window.location.href='https://github.com/DDARK00'">
-                        Go to Git</button>
+                        <button class="btn-small btn--ghost"
+                            onclick="window.location.href='https://github.com/DDARK00'">
+                            Go to Git</button>
                     </p>
                 </article>
             </aside>
@@ -403,7 +409,7 @@
                 }
                 if (progress.value === 100) {
                     confetti.launch({
-                        count:150
+                        count: 150
                     })
                 }
 
@@ -423,6 +429,9 @@
             messageBtn.addEventListener("click", () => {
                 const randomIdx = Math.floor(Math.random() * messages.length);
                 messageEl.textContent = "💡 " + messages[randomIdx];
+                confetti.launch({
+                    count:20
+                })
             });
 
             // 4. Details 태그 오픈/클로즈 트랜지션 처리
