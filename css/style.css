@@ -34,7 +34,7 @@
     --color-lecture2-border: var(--color-stamp);
     --color-lecture3: rgba(196, 92, 78, .12);
     --color-lecture3-border: var(--color-terracotta);
-    --color-lecture4: rgba(35, 43, 61, .08);
+    --color-lecture4: rgba(0, 0, 0, 0.1);
     --color-lecture4-border: var(--color-ink);
     --color-lunch: rgba(184, 121, 47, .22);
 }
@@ -766,5 +766,293 @@ video {
     .timetable-table th,
     .timetable-table td {
         padding: 10px 12px;
+    }
+}
+
+/* ==================================================
+   SIGN UP 페이지
+   ================================================== */
+
+.signup {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 46px 20px 80px;
+}
+
+.form-card {
+    display: block;
+    background: var(--color-card);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: 8px 36px 36px;
+}
+
+.form-section {
+    border: 1px solid rgba(35, 43, 61, .14);
+    border-radius: var(--radius-card);
+    padding: 26px 26px 8px;
+    margin: 28px 0;
+}
+
+.form-section > legend {
+    font-family: var(--font-display);
+    font-size: 17px;
+    color: var(--color-ink);
+    background: var(--color-card);
+    padding: 2px 12px;
+    margin-left: -4px;
+}
+
+.field {
+    margin-bottom: 20px;
+}
+
+.field label,
+.field > span:first-child {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--color-ink-soft);
+    font-weight: 700;
+}
+
+.field input[type="text"],
+.field input[type="password"],
+.field input[type="date"],
+.field select,
+.field textarea {
+    width: 100%;
+    font-size: 16px;
+    padding: 13px 16px;
+    border: 1px solid rgba(35, 43, 61, .2);
+    border-radius: var(--radius-card);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+
+.field textarea {
+    resize: vertical;
+    min-height: 130px;
+    line-height: 1.6;
+}
+
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+    outline: none;
+    border-color: var(--color-teal);
+    box-shadow: 0 0 0 3px rgba(63, 108, 99, .18);
+}
+
+.field input:disabled {
+    background: var(--color-paper-alt);
+    color: var(--color-ink-soft);
+    cursor: not-allowed;
+}
+
+.field-hint {
+    display: block;
+    margin-top: 7px;
+    font-size: 13px;
+    color: var(--color-ink-soft);
+    min-height: 1.2em;
+}
+
+.field-hint--end {
+    text-align: right;
+}
+
+.field--inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.field--inline label {
+    margin-bottom: 0;
+    font-weight: 400;
+    color: var(--color-ink);
+    cursor: pointer;
+}
+
+/* 이메일 아이디 + 도메인 한 줄 구성 */
+
+.email-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.email-row input,
+.email-row select {
+    width: auto;
+    flex: 1 1 150px;
+}
+
+.email-at {
+    color: var(--color-ink-soft);
+    font-weight: 700;
+}
+
+/* 라디오 / 체크박스 그룹 (칩 스타일) */
+
+.choice-group {
+    border: none;
+    padding: 0;
+    margin: 0 0 22px;
+}
+
+.choice-group > legend {
+    padding: 0;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-ink-soft);
+}
+
+.choice-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+}
+
+.choice {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-paper);
+    border: 1px solid rgba(35, 43, 61, .16);
+    border-radius: 999px;
+    padding: 9px 16px;
+    transition: border-color .2s var(--ease), background .2s var(--ease);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.choice:has(input:checked) {
+    border-color: var(--color-teal);
+    background: rgba(63, 108, 99, .1);
+}
+
+.choice label {
+    margin: 0;
+    font-weight: 400;
+    color: var(--color-ink);
+    cursor: pointer;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--color-teal);
+    cursor: pointer;
+}
+
+/* 클릭 반복 시 텍스트가 드래그로 선택되는 것 방지 */
+.choice,
+.choice *,
+.field--inline,
+.field--inline label,
+.btn {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* 약관 상세 */
+
+.terms-box {
+    background: var(--color-paper-alt);
+    border-radius: var(--radius-card);
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    color: var(--color-ink-soft);
+}
+
+.terms-box summary {
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--color-ink);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.terms-box summary::-webkit-details-marker {
+    color: var(--color-teal);
+}
+
+.terms-content {
+    height: 0;
+    overflow: hidden;
+    transition: height .35s var(--ease);
+}
+
+.terms-content p {
+    margin-top: 10px;
+    padding-bottom: 2px;
+    line-height: 1.7;
+}
+
+/* 버튼 */
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 32px;
+}
+
+.btn {
+    appearance: none;
+    border: none;
+    border-radius: 999px;
+    padding: 14px 34px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+
+.btn--primary {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    box-shadow: 0 10px 22px rgba(35, 43, 61, .25);
+}
+
+.btn--primary:hover {
+    background: var(--color-teal-dark);
+    transform: translateY(-2px);
+}
+
+.btn--ghost {
+    background: transparent;
+    color: var(--color-ink-soft);
+    border: 1px solid rgba(35, 43, 61, .2);
+}
+
+.btn--ghost:hover {
+    border-color: var(--color-ink-soft);
+    color: var(--color-ink);
+}
+
+@media (max-width: 640px) {
+    .form-card {
+        padding: 4px 18px 24px;
+    }
+
+    .form-section {
+        padding: 20px 16px 4px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .btn {
+        width: 100%;
     }
 }
