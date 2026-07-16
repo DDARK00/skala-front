@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>My Travel Album</title>
+</head>
+
+<body>
+    <div class="trip-header-gap"> </div>
+    <header class="trip-header-container">
+        <div>
+            <h1>📸 Summer Travel</h1>
+            <p>2026 여행 앨범</p>
+        </div>
+        <audio autoplay loop controls>
+            <source src="../media/grand_project-wonders-of-the-earth.mp3" type="audio/mpeg">
+            브라우저가 audio를 지원하지 않습니다.
+        </audio>
+    </header>
+
+    <main id="content" class="trip-container open">
+        <!-- ================= 상세 페이지 ================= -->
+        <section id="trip-detail" class="trip-detail">
+            <a href="#" class="trip-close">접기</a>
+            <h2 class="trip-name">제주도 협재해변</h2>
+            <img class="trip-img" src="../media/anastase-maragos.jpg" alt="협재해변">
+            <p class="trip-desc">
+                맑은 에메랄드빛 바다와 하얀 모래사장이 정말 인상 깊었던 장소입니다.
+                해 질 무렵 노을까지 감상하며 하루를 마무리할 수 있었습니다.
+                <br><br>
+                ✔ 추천 음식 : 흑돼지<br>
+                ✔ 추천 시간 : 오후 5시 이후<br>
+                ✔ 추천 포인트 : 노을, 해변 산책
+            </p>
+        </section>
+
+        <!-- ================= 앨범 ================= -->
+        <!-- <section class="trip-album">
+            <article class="trip-card">
+                <a href="#trip-detail">
+                    <img src="jeju.jpg" alt="제주 협재">
+                    <h2>제주 협재해변</h2>
+                    <p>
+                        사진을 클릭하면 여행 후기를 볼 수 있습니다.
+                    </p>
+                </a>
+            </article>
+        </section> -->
+    </main>
+
+    <footer>
+        <section class="vlog">
+            <h2>🎬 Travel Vlog</h2>
+            <video controls>
+                <source src="../media/videomaker_watermarked.mp4" type="video/mp4">
+                브라우저가 video를 지원하지 않습니다.
+            </video>
+
+            <p>베트남 닌빈의 산 속 고대 사원을 느껴보세요!</p>
+            <small>produced by videomaker.me</small>
+        </section>
+    </footer>
+
+    <script>
+        const main = document.querySelector("main")
+        const detail = document.querySelector("#trip-detail")
+        const detaillName = document.querySelector(".trip-name")
+
+        const contentSrc = [{
+            name: "아테나 경관",
+            desc: "눈에 띄는 언덕이 있는 아테네 도시 경관\n 초상, 사람, 건축학 및 구름을(를) 촬영한 Athens, Greece에 있는 Anastase Maragos",
+            alt: "눈에 띄는 언덕이 있는 아테나 경관",
+            src: "../media/anastase-maragos.jpg",
+            source: "사진 출처 : Unsplash의 Anastase Maragos"
+        },
+        {
+            name: "튀르키예의 아디야만",
+            desc: "산에 있는 고대 조각상과 영묘.\n 파랑, 보라색 및 넴루트 산을(를) 촬영한 Türkiye에 있는 Yunus Tuğ (@yunustug)의 이 무료 HD 사진",
+            alt: "산에 있는 고대 조각상과 영묘",
+            src: "../media/yunus-tug.jpg",
+            source: "사진 출처 : Unsplash의 Yunus Tuğ"
+        },
+        {
+            name: "베트남 닌빈",
+            desc: "빨간 옷을 입은 사람이 울창한 산 속 고대 사원으로 걸어간다.",
+            alt: "빨간 옷을 입은 사람이 울창한 산 속 고대 사원으로 걸어간다.",
+            src: "../media/lukas-konvica.jpg",
+            source: "사진 출처 : Unsplash의 Lukáš Konvica"
+        }]
+
+        contentSrc.forEach((src,idx) => {
+            const section = document.createElement("section");
+            section.className = "trip-album"
+
+            const article = document.createElement("article");
+            article.className = "trip-card";
+
+            const a = document.createElement("a");
+            a.href = "#trip-detail";
+
+            const img = document.createElement("img");
+            img.src = src.src;
+            img.alt = src.alt;
+
+            const h2 = document.createElement("h2");
+            h2.textContent = src.name;
+
+            const p = document.createElement("p");
+            p.textContent = src.desc;
+
+            const small = document.createElement("small");
+            small.textContent = src.source;
+
+            a.appendChild(img);
+            a.appendChild(h2);
+            a.appendChild(p);
+
+            article.appendChild(a);
+            article.appendChild(small);
+            article.id = "article-"+idx;
+            section.appendChild(article)
+
+            section.addEventListener("click",()=>{
+                detail.children[1].textContent=src.name;
+                detail.children[0].href="#article-"+idx
+                detail.children[2].src=src.src
+                detail.children[3].textContent=src.desc;
+            })
+            main.appendChild(section);
+        });
+
+        // <section id="trip-detail" class="trip-detail">
+        //     <a href="#" class="trip-close">접기</a>
+        //     <h2 class="trip-name">제주도 협재해변</h2>
+        //     <img class="trip-img" src="../media/anastase-maragos.jpg" alt="협재해변">
+        //     <p class="trip-desc">
+        //         맑은 에메랄드빛 바다와 하얀 모래사장이 정말 인상 깊었던 장소입니다.
+        //         해 질 무렵 노을까지 감상하며 하루를 마무리할 수 있었습니다.
+        //         <br><br>
+        //         ✔ 추천 음식 : 흑돼지<br>
+        //         ✔ 추천 시간 : 오후 5시 이후<br>
+        //         ✔ 추천 포인트 : 노을, 해변 산책
+        //     </p>
+        // </section>
+        // <section class="trip-album">
+        //     <article class="trip-card">
+        //         <a href="#trip-detail">
+        //             <img src="jeju.jpg" alt="제주 협재">
+        //             <h2>제주 협재해변</h2>
+        //             <p>
+        //                 사진을 클릭하면 여행 후기를 볼 수 있습니다.
+        //             </p>
+        //         </a>
+        //     </article>
+        // </section>
+
+    </script>
+</body>
+
+</html>

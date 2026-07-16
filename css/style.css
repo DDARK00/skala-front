@@ -13,6 +13,7 @@
     --color-teal-dark: #2b4b45;
     --color-stamp: #b8792f;
     --color-stamp-dark: #8f5c1f;
+    --color-terracotta: #c45c4e;
 
     --font-display: "Nanum Myeongjo", serif;
     --font-body: "Nanum Gothic", sans-serif;
@@ -25,6 +26,17 @@
 
     /* 헤더 실제 높이 (JS가 ResizeObserver로 갱신, 초기값은 대략치) */
     --header-h: 96px;
+
+    /* 시간표 강의 시간대별 색상 */
+    --color-lecture1: rgba(63, 108, 99, .10);
+    --color-lecture1-border: var(--color-teal);
+    --color-lecture2: rgba(184, 121, 47, .14);
+    --color-lecture2-border: var(--color-stamp);
+    --color-lecture3: rgba(196, 92, 78, .12);
+    --color-lecture3-border: var(--color-terracotta);
+    --color-lecture4: rgba(35, 43, 61, .08);
+    --color-lecture4-border: var(--color-ink);
+    --color-lunch: rgba(184, 121, 47, .22);
 }
 
 /* ---------------- 스크롤바 ---------------- */
@@ -555,5 +567,204 @@ video {
     .trip-card {
         opacity: 1;
         transform: none;
+    }
+}
+
+/* ==================================================
+   CLASS TIMETABLE 페이지
+   ================================================== */
+
+.header-center {
+    justify-content: center;
+}
+
+.header-center .trip-header-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.timetable {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 46px 20px 70px;
+}
+
+.timetable-eyebrow {
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.timetable h2 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 34px;
+    color: var(--color-ink);
+}
+
+/* ---------------- 테이블 ---------------- */
+
+.timetable-scroll {
+    overflow-x: auto;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    background: var(--color-card);
+}
+
+.timetable-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.timetable-table caption {
+    caption-side: top;
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .08em;
+    color: var(--color-stamp-dark);
+    padding: 18px 22px 14px;
+}
+
+.timetable-table th,
+.timetable-table td {
+    border: 1px solid rgba(35, 43, 61, .12);
+    padding: 14px 16px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.timetable-table thead th {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-weight: 700;
+    border-bottom: 2px dashed rgba(246, 241, 230, .35);
+}
+
+.timetable-table tbody th[scope="row"] {
+    background: var(--color-paper-alt);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--color-ink-soft);
+    white-space: nowrap;
+}
+
+.timetable-table tbody td {
+    background: var(--color-card);
+    line-height: 1.5;
+    color: var(--color-ink);
+}
+
+.timetable-table .lecture1 {
+    background: var(--color-lecture1);
+    border-left: 3px solid var(--color-lecture1-border);
+}
+
+.timetable-table .lecture2 {
+    background: var(--color-lecture2);
+    border-left: 3px solid var(--color-lecture2-border);
+}
+
+.timetable-table .lecture3 {
+    background: var(--color-lecture3);
+    border-left: 3px solid var(--color-lecture3-border);
+}
+
+.timetable-table .lecture4 {
+    background: var(--color-lecture4);
+    border-left: 3px solid var(--color-lecture4-border);
+}
+
+.timetable-table .lunch {
+    background: var(--color-lunch);
+    font-weight: 700;
+    color: var(--color-stamp-dark);
+    letter-spacing: .04em;
+}
+
+.timetable-table tfoot td {
+    background: var(--color-paper-alt);
+    color: var(--color-ink-soft);
+    font-size: 13px;
+    padding: 16px;
+}
+
+.timetable-table abbr {
+    text-decoration-color: var(--color-teal);
+    cursor: help;
+}
+
+/* ---------------- 색상 범례 ---------------- */
+
+.timetable-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 26px;
+    list-style: none;
+    margin-top: 28px;
+    font-size: 13px;
+    color: var(--color-ink-soft);
+}
+
+.legend-swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+.legend-day {
+    background: var(--color-ink);
+}
+
+.legend-lecture1 {
+    background: var(--color-lecture1-border);
+}
+
+.legend-lecture2 {
+    background: var(--color-lecture2-border);
+}
+
+.legend-lecture3 {
+    background: var(--color-lecture3-border);
+}
+
+.legend-lecture4 {
+    background: var(--color-lecture4-border);
+}
+
+.legend-lunch {
+    background: var(--color-stamp);
+}
+
+/* ---------------- 공통 페이지 푸터 ---------------- */
+
+.site-footer {
+    text-align: center;
+    padding: 10px 20px 50px;
+    color: var(--color-ink-soft);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .04em;
+}
+
+@media (max-width: 720px) {
+    .timetable {
+        padding: 34px 14px 50px;
+    }
+
+    .timetable-table {
+        font-size: 13px;
+    }
+
+    .timetable-table th,
+    .timetable-table td {
+        padding: 10px 12px;
     }
 }
