@@ -931,9 +931,11 @@ video {
     user-select: none;
     -webkit-user-select: none;
 }
-.choice > li {
+
+.choice > a {
     padding: 9px 16px;   
 }
+
 .choice:has(input:checked) {
     border-color: var(--color-teal);
     background: rgba(63, 108, 99, .1);
