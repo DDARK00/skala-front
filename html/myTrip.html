@@ -63,6 +63,8 @@
             </div>
         </section>
     </footer>
+    <button id="goToHomeBtn" class="scroll-top-btn" aria-label="홈으로 이동" title="홈으로 이동">🏠</button>
+    <button id="scrollTopBtn" class="scroll-top-btn" aria-label="맨 위로 이동" title="맨 위로 이동">⬆</button>
 
     <script>
         const grid = document.querySelector("#trip-grid");
@@ -246,6 +248,28 @@
                 detailImgFrame.style.setProperty("--holo-scale", "1");
             });
         }
+
+                const goToHomeBtn = document.querySelector("#goToHomeBtn");
+        const scrollTopBtn = document.querySelector("#scrollTopBtn");
+        window.addEventListener("scroll", () => {
+            scrollTopBtn.classList.toggle("is-visible", window.scrollY > 400);
+            goToHomeBtn.classList.toggle("is-visible", window.scrollY > 400);
+        });
+        
+        goToHomeBtn.addEventListener("click", ()=>{
+            window.location.href="/html/index.html"
+        })
+
+        scrollTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // 푸터 "맨 위로 이동" 링크도 smooth 스크롤로 동작
+        const scrollTopLink = document.querySelector("#scrollTopLink");
+        scrollTopLink.addEventListener("click", (event) => {
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
     </script>
     <!-- \전역 분리용 Canvas 앵커 컨테이너 및 여름 계절감 배경 모듈 스크립트 -->
     <div id="summer-canvas-anchor"></div>

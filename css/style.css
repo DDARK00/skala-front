@@ -44,6 +44,7 @@
 html {
     scrollbar-color: var(--color-teal) var(--color-paper);
     scrollbar-width: thin;
+    scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar {
@@ -1458,11 +1459,17 @@ progress::-moz-progress-bar {
 }
 
 /* ---------------- 7. 스크롤 시 나타나는 맨 위로 버튼 ---------------- */
+#scrollTopBtn {
+    right: 24px;
+    bottom: 24px;
+}
+#goToHomeBtn {
+    right: 24px;
+    bottom: 72px;
+}
 
 .scroll-top-btn {
     position: fixed;
-    right: 24px;
-    bottom: 24px;
     width: 46px;
     height: 46px;
     border: none;

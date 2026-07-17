@@ -197,6 +197,7 @@
         <p>📅 작업일 : <time datetime="2026-07">2026년 7월</time></p>
         <p><a href="#" id="scrollTopLink">⬆ 맨 위로 이동</a></p>
     </footer>
+    <button id="goToHomeBtn" class="scroll-top-btn" aria-label="홈으로 이동" title="홈으로 이동">🏠</button>
     <button id="scrollTopBtn" class="scroll-top-btn" aria-label="맨 위로 이동" title="맨 위로 이동">⬆</button>
 
     <script>
@@ -326,10 +327,17 @@
             }
         });
 
+        const goToHomeBtn = document.querySelector("#goToHomeBtn");
         const scrollTopBtn = document.querySelector("#scrollTopBtn");
         window.addEventListener("scroll", () => {
             scrollTopBtn.classList.toggle("is-visible", window.scrollY > 400);
+            goToHomeBtn.classList.toggle("is-visible", window.scrollY > 400);
         });
+        
+        goToHomeBtn.addEventListener("click", ()=>{
+            window.location.href="/html/index.html"
+        })
+
         scrollTopBtn.addEventListener("click", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
