@@ -14,7 +14,8 @@
         <div class="trip-header-text">
             <p class="trip-eyebrow">
                 <a href="index.html"> &lt;Home&gt;</a><br>
-                ACCOUNT SETUP · 2026</p>
+                ACCOUNT SETUP · 2026
+            </p>
             <h1>👤 회원가입</h1>
             <p class="trip-subtitle">서비스를 이용하기 위한 회원 정보를 입력해 주세요.</p>
         </div>
@@ -113,14 +114,14 @@
                         <legend>관심 분야 (중복 선택 가능)</legend>
                         <div class="choice-row">
                             <label for="frontend">
-                            <span class="choice">
-                                <input type="checkbox" id="frontend" name="interest" value="frontend">
+                                <span class="choice">
+                                    <input type="checkbox" id="frontend" name="interest" value="frontend">
                                     웹 프론트엔드
                                 </span>
                             </label>
                             <label for="uiux">
-                            <span class="choice">
-                                <input type="checkbox" id="uiux" name="interest" value="uiux">
+                                <span class="choice">
+                                    <input type="checkbox" id="uiux" name="interest" value="uiux">
                                     UI/UX 디자인 표준
                                 </span>
                             </label>
@@ -131,8 +132,8 @@
                                 </span>
                             </label>
                             <label for="cloud">
-                            <span class="choice">
-                                <input type="checkbox" id="cloud" name="interest" value="cloud">
+                                <span class="choice">
+                                    <input type="checkbox" id="cloud" name="interest" value="cloud">
                                     클라우드 인프라
                                 </span>
                             </label>
@@ -194,7 +195,9 @@
 
     <footer class="site-footer">
         <p>📅 작업일 : <time datetime="2026-07">2026년 7월</time></p>
+        <p><a href="#" id="scrollTopLink">⬆ 맨 위로 이동</a></p>
     </footer>
+    <button id="scrollTopBtn" class="scroll-top-btn" aria-label="맨 위로 이동" title="맨 위로 이동">⬆</button>
 
     <script>
         const userId = document.querySelector("#userId");
@@ -321,6 +324,21 @@
                 updatePasswordMatch();
                 passwordCheck.focus();
             }
+        });
+
+        const scrollTopBtn = document.querySelector("#scrollTopBtn");
+        window.addEventListener("scroll", () => {
+            scrollTopBtn.classList.toggle("is-visible", window.scrollY > 400);
+        });
+        scrollTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // 푸터 "맨 위로 이동" 링크도 smooth 스크롤로 동작
+        const scrollTopLink = document.querySelector("#scrollTopLink");
+        scrollTopLink.addEventListener("click", (event) => {
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
     </script>
     <!-- \전역 분리용 Canvas 앵커 컨테이너 및 여름 계절감 배경 모듈 스크립트 -->

@@ -91,7 +91,7 @@
             source: "사진 출처 : Unsplash의 Lukáš Konvica"
         }]
 
-        contentSrc.forEach((src,idx) => {
+        contentSrc.forEach((src, idx) => {
             const section = document.createElement("section");
             section.className = "trip-album"
 
@@ -120,14 +120,14 @@
 
             article.appendChild(a);
             article.appendChild(small);
-            article.id = "article-"+idx;
+            article.id = "article-" + idx;
             section.appendChild(article)
 
-            section.addEventListener("click",()=>{
-                detail.children[1].textContent=src.name;
-                detail.children[0].href="#article-"+idx
-                detail.children[2].src=src.src
-                detail.children[3].textContent=src.desc;
+            section.addEventListener("click", () => {
+                detail.children[1].textContent = src.name;
+                detail.children[0].href = "#article-" + idx
+                detail.children[2].src = src.src
+                detail.children[3].textContent = src.desc;
             })
             main.appendChild(section);
         });

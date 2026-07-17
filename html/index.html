@@ -23,12 +23,297 @@
             width: 100%;
             height: 100%;
         }
+
+        /* ---------------- 사이드바: 실시간 날씨 위젯 ---------------- */
+
+        .weather-block .field {
+            margin-bottom: 14px;
+        }
+
+        .weather-block .field label {
+            margin-bottom: 8px;
+        }
+
+        .weather-box {
+            background: var(--color-paper-alt);
+            border-radius: var(--radius-card);
+            padding: 14px 16px;
+            min-height: 64px;
+        }
+
+        .weather-city-name {
+            font-weight: 700;
+            color: var(--color-ink);
+            margin-bottom: 4px;
+        }
+
+        .weather-coords {
+            font-family: var(--font-mono);
+            font-size: 12.5px;
+            color: var(--color-ink-soft);
+            margin-bottom: 6px;
+        }
+
+        .weather-coords span {
+            color: var(--color-stamp-dark);
+        }
+
+        .weather-loading {
+            font-size: 13.5px;
+            color: var(--color-ink-soft);
+        }
+
+        .weather-placeholder {
+            font-size: 13.5px;
+            color: var(--color-ink-soft);
+        }
+
+        .weather-result {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 4px 12px;
+            padding-top: 6px;
+            border-top: 1px dashed rgba(35, 43, 61, .16);
+        }
+
+        .weather-temp {
+            font-family: var(--font-mono);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-teal-dark);
+        }
+
+        .weather-humid {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--color-ink);
+        }
+
+        .weather-time {
+            flex-basis: 100%;
+            font-size: 12px;
+            color: var(--color-ink-soft);
+        }
+
+        .weather-error {
+            font-size: 13.5px;
+            color: var(--color-terracotta);
+            animation: weather-fade-in .35s var(--ease);
+        }
+
+        .weather-result {
+            animation: weather-fade-in .4s var(--ease);
+        }
+
+        .loading-dots span {
+            display: inline-block;
+            opacity: .2;
+            animation: dot-blink 1.2s var(--ease) infinite;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: .2s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: .4s;
+        }
+
+        @keyframes dot-blink {
+
+            0%,
+            80%,
+            100% {
+                opacity: .2;
+            }
+
+            40% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes weather-fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ---------------- 1. 상단 바로가기 메뉴 hover ---------------- */
+
+        .page-nav .choice {
+            transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+        }
+
+        .page-nav .choice:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-card-hover);
+            border-color: var(--color-teal);
+        }
+
+        /* ---------------- 2. 지구본 범례 hover ---------------- */
+
+        .globe-legend li a {
+            transition: color .2s var(--ease);
+        }
+
+        .globe-legend li:hover a {
+            color: var(--color-teal-dark);
+        }
+
+        .globe-legend li:hover .legend-dot {
+            animation: dot-pulse 1s var(--ease) infinite;
+        }
+
+        @keyframes dot-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 var(--dot-color, var(--color-teal));
+            }
+
+            50% {
+                transform: scale(1.35);
+                box-shadow: 0 0 0 4px transparent;
+            }
+        }
+
+        /* ---------------- 3. 진행률: 카드 안에서 확대 + 중앙 정렬 ---------------- */
+
+        .progress-row--hero {
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            gap: 14px;
+            padding: 14px 0 6px;
+        }
+
+        .progress-row--hero progress {
+            width: min(90%, 560px);
+            height: 22px;
+        }
+
+        .progress-row--hero progress::-webkit-progress-value {
+            transition: width 1.3s var(--ease);
+        }
+
+        .progress-row--hero .progress-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-teal-dark);
+        }
+
+        /* ---------------- 4. 미니 게임 카드 hover ---------------- */
+
+        .game-block {
+            border-left: 3px solid transparent;
+            transition: background .25s var(--ease), border-left-color .25s var(--ease), padding-left .25s var(--ease);
+        }
+
+        .game-block:hover {
+            background: var(--color-paper-alt);
+            border-left-color: var(--color-teal);
+            padding-left: 12px;
+        }
+
+        /* ---------------- 5. 가방 리스트 순차 등장 애니메이션 ---------------- */
+
+        .bag-list li {
+            animation: bag-item-in .4s var(--ease) both;
+        }
+
+        .bag-list li:nth-child(1) {
+            animation-delay: .05s;
+        }
+
+        .bag-list li:nth-child(2) {
+            animation-delay: .1s;
+        }
+
+        .bag-list li:nth-child(3) {
+            animation-delay: .15s;
+        }
+
+        .bag-list li:nth-child(4) {
+            animation-delay: .2s;
+        }
+
+        .bag-list li:nth-child(5) {
+            animation-delay: .25s;
+        }
+
+        .bag-list li:nth-child(n+6) {
+            animation-delay: .3s;
+        }
+
+        @keyframes bag-item-in {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* ---------------- 8. 상세정보 화살표 회전 ---------------- */
+
+        .terms-box summary {
+            list-style: none;
+            position: relative;
+            padding-right: 26px;
+        }
+
+        .terms-box summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .terms-box summary::after {
+            content: "▶";
+            position: absolute;
+            right: 2px;
+            top: 0;
+            display: inline-block;
+            color: var(--color-teal);
+            transition: transform .3s var(--ease);
+        }
+
+        .terms-box[open] summary::after {
+            transform: rotate(90deg);
+        }
+
+        /* ---------------- 푸터 라이센스 영역 ---------------- */
+
+        .footer-license {
+            max-width: 420px;
+            margin: 16px auto 0;
+            text-align: left;
+            font-family: var(--font-body);
+            font-size: 13px;
+        }
+
+        .footer-license summary {
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: .04em;
+        }
     </style>
 </head>
 
 <body>
-    <div class="trip-header-gap"> </div>
-    <header id="top" class="trip-header-container header-center">
+    <div id="top" class="trip-header-gap"> </div>
+    <header class="trip-header-container header-center">
         <div class="trip-header-text">
             <p class="trip-eyebrow">PERSONAL PROJECT · 2026</p>
             <h1 title="스칼라 프로젝트 메인 페이지">🎉 환영합니다</h1>
@@ -44,11 +329,11 @@
                 <li class="choice"><a href="./holiday.html" title="나의 휴일 페이지 이동">🏖 나의 휴일</a></li>
                 <li class="choice"><a href="./myProfile.html" title="나의 프로필 페이지 이동">👤 나의 프로필</a></li>
                 <li class="choice"><a href="./myTrip.html" title="나의 여행 로그 페이지 이동">📸 나의 여행 로그</a></li>
-            <li class="choice"><a href="./signUp.html" title="회원가입 페이지 이동">📝 회원가입 창</a></li>
-            <li class="choice"><a href="./signUpResult.html" title="회원가입 완료 페이지 이동">🎉 회원가입 완료</a></li>
-        </ul>
-    </nav>
-</div>
+                <li class="choice"><a href="./signUp.html" title="회원가입 페이지 이동">📝 회원가입 창</a></li>
+                <li class="choice"><a href="./signUpResult.html" title="회원가입 완료 페이지 이동">🎉 회원가입 완료</a></li>
+            </ul>
+        </nav>
+    </div>
 
     <div class="page-layout">
         <main class="page-main">
@@ -99,9 +384,9 @@
 
             <section id="project-status">
                 <h2>📈 진행 상황</h2>
-                <p class="progress-row">
+                <p class="progress-row progress-row--hero">
                     현재 제작 진행률:
-                    <progress title="100%" value="100" max="100">100%</progress>
+                    <progress id="mainProgress" title="100%" value="100" max="100" data-target="100">100%</progress>
                     <span class="progress-value">100%</span>
                 </p>
             </section>
@@ -141,6 +426,25 @@
                     <button id="showBag" class="btn btn--primary">가방 열어보기</button>
                     <ul id="bagList" class="bag-list" aria-live="polite"></ul>
                 </section>
+
+                <section id="game-weather" class="game-block weather-block">
+                    <h3>⛅ 실시간 날씨</h3>
+                    <p>도시를 선택하면 좌표와 실시간 날씨를 보여드려요. (open-meteo)</p>
+
+                    <div class="field">
+                        <label for="citySelect">도시 선택</label>
+                        <select id="citySelect">
+                            <option value="seoul" data-lat="37.5665" data-lon="126.9780" selected>서울, 대한민국</option>
+                            <option value="adiyaman" data-lat="37.7648" data-lon="38.2786">아디야만, 튀르키예</option>
+                            <option value="athens" data-lat="37.9838" data-lon="23.7275">아테네, 그리스</option>
+                            <option value="ninhbinh" data-lat="20.2506" data-lon="105.9744">닌빈, 베트남</option>
+                        </select>
+                    </div>
+
+                    <div id="weather-box" class="weather-box" aria-live="polite">
+                        <p class="weather-placeholder">도시를 선택해주세요.</p>
+                    </div>
+                </section>
             </div>
         </aside>
     </div>
@@ -150,49 +454,116 @@
     <footer class="site-footer">
         <p>📋 개인 프로젝트 페이지</p>
         <p>제작일: <time datetime="2026-07">2026년 7월</time></p>
-        <p><a href="#top">⬆ 맨 위로 이동</a></p>
+
+        <details class="terms-box footer-license" id="footerLicense">
+            <summary>출처 및 라이센스 보기</summary>
+            <div class="terms-content">
+                <p>image by: unsplash <br>
+                    <a target="_blank" href="https://unsplash.com/ko/%EC%82%AC%EC%A7%84/%EC%82%B0%EC%97%90-%EC%9E%88%EB%8A%94-%EA%B3%A0%EB%8C%80-%EC%A1%B0%EA%B0%81%EC%83%81%EA%B3%BC-%EC%98%81%EB%AC%98-rmUcAo02exY">산에 있는 조각상과 영묘</a>
+                    <a target="_blank" href="https://unsplash.com/ko/%EC%82%AC%EC%A7%84/%EB%88%88%EC%97%90-%EB%9D%84%EB%8A%94-%EC%96%B8%EB%8D%95%EC%9D%B4-%EC%9E%88%EB%8A%94-%EC%95%84%ED%85%8C%EB%84%A4-%EB%8F%84%EC%8B%9C-%EA%B2%BD%EA%B4%80-pINqmDp0gts">눈에 띄는 언덕이 있는 아테네 도시 경관</a>
+                    <a target="_blank" href="https://unsplash.com/ko/%EC%82%AC%EC%A7%84/%EB%B9%A8%EA%B0%84-%EC%98%B7%EC%9D%84-%EC%9E%85%EC%9D%80-%EC%82%AC%EB%9E%8C%EC%9D%B4-%EC%9A%B8%EC%B0%BD%ED%95%9C-%EC%82%B0-%EC%86%8D-%EA%B3%A0%EB%8C%80-%EC%82%AC%EC%9B%90%EC%9C%BC%EB%A1%9C-%EA%B1%B8%EC%96%B4%EA%B0%84%EB%8B%A4-0bnd8yhlw7A">빨간 옷을 입은 사람이 울창한 산 속 고대 사원으로 걸어간다</a>
+                </p>
+                <p>
+                    video by: videomaker <br>
+                    <a target="_blank" href="https://videomaker.me/ko">videomaker.me</a>
+                </p>
+                <p>
+                    audio by: pixabay ℗Grand Project Music <br>
+                    <a target="_blank" href="https://pixabay.com/music/adventure-wonders-of-the-earth-550792/">Wonders of the Earth</a>
+                    
+                </p>
+            </div>
+        </details>
+
+        <p><a href="#" id="scrollTopLink">⬆ 맨 위로 이동</a></p>
     </footer>
+
+    <button id="scrollTopBtn" class="scroll-top-btn" aria-label="맨 위로 이동" title="맨 위로 이동">⬆</button>
 
     <script type="module" src="../script/globe.js"></script>
     <script src="../script/upDown.js"></script>
     <script src="../script/grade.js"></script>
     <script src="../script/bag.js"></script>
+    <script type="module" src="../script/realtimeInfo.js"></script>
     <script>
-        // "프로젝트 제작 방향 보기" 부드럽게 열고 닫기 (다른 페이지와 동일한 패턴)
-        const directionBox = document.querySelector("#projectDirection");
-        const directionSummary = directionBox.querySelector("summary");
-        const directionContent = directionBox.querySelector(".terms-content");
+        // 3. 진행률 바: 화면(뷰포트)에 들어오는 순간 0 → 목표값으로 채워지는 연출
+        const mainProgress = document.querySelector("#mainProgress");
+        const progressSection = document.querySelector("#project-status");
+        if (mainProgress && progressSection) {
+            const target = Number(mainProgress.dataset.target) || Number(mainProgress.value) || 0;
+            mainProgress.value = 0;
 
-        directionSummary.addEventListener("click", (event) => {
-            event.preventDefault();
-            directionBox.open ? closeDirection() : openDirection();
+            const progressObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        mainProgress.value = target;
+                        progressObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.4 });
+
+            progressObserver.observe(progressSection);
+        }
+
+        // 7. 스크롤을 일정 이상 내렸을 때만 나타나는 "맨 위로" 플로팅 버튼
+        const scrollTopBtn = document.querySelector("#scrollTopBtn");
+        window.addEventListener("scroll", () => {
+            scrollTopBtn.classList.toggle("is-visible", window.scrollY > 400);
+        });
+        scrollTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
 
-        function openDirection() {
-            directionBox.open = true;
-            const targetHeight = directionContent.scrollHeight;
-            directionContent.style.height = "0px";
-            requestAnimationFrame(() => {
-                directionContent.style.height = targetHeight + "px";
+        // 푸터 "맨 위로 이동" 링크도 smooth 스크롤로 동작
+        const scrollTopLink = document.querySelector("#scrollTopLink");
+        scrollTopLink.addEventListener("click", (event) => {
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </script>
+    <script>
+        // "프로젝트 제작 방향 보기" / "라이센스 보기" 공통: 부드럽게 열고 닫기
+        function setupCollapsible(detailsEl) {
+            const summaryEl = detailsEl.querySelector("summary");
+            const contentEl = detailsEl.querySelector(".terms-content");
+
+            summaryEl.addEventListener("click", (event) => {
+                event.preventDefault();
+                detailsEl.open ? closeBox() : openBox();
             });
-            directionContent.addEventListener("transitionend", function onEnd() {
-                directionContent.style.height = "auto";
-                directionContent.removeEventListener("transitionend", onEnd);
-            }, { once: true });
+
+            function openBox() {
+                detailsEl.open = true;
+                const targetHeight = contentEl.scrollHeight;
+                contentEl.style.height = "0px";
+                requestAnimationFrame(() => {
+                    contentEl.style.height = targetHeight + "px";
+                });
+                contentEl.addEventListener("transitionend", function onEnd() {
+                    contentEl.style.height = "auto";
+                    contentEl.removeEventListener("transitionend", onEnd);
+                }, { once: true });
+            }
+
+            function closeBox() {
+                contentEl.style.height = contentEl.scrollHeight + "px";
+                requestAnimationFrame(() => {
+                    contentEl.style.height = "0px";
+                });
+                contentEl.addEventListener("transitionend", function onEnd() {
+                    detailsEl.open = false;
+                    contentEl.style.height = "";
+                    contentEl.removeEventListener("transitionend", onEnd);
+                }, { once: true });
+            }
         }
 
-        function closeDirection() {
-            directionContent.style.height = directionContent.scrollHeight + "px";
-            requestAnimationFrame(() => {
-                directionContent.style.height = "0px";
-            });
-            directionContent.addEventListener("transitionend", function onEnd() {
-                directionBox.open = false;
-                directionContent.style.height = "";
-                directionContent.removeEventListener("transitionend", onEnd);
-            }, { once: true });
-        }
+        setupCollapsible(document.querySelector("#projectDirection"));
+        setupCollapsible(document.querySelector("#footerLicense"));
     </script>
+    <!-- \전역 분리용 Canvas 앵커 컨테이너 및 여름 계절감 배경 모듈 스크립트 -->
+    <div id="summer-canvas-anchor"></div>
+    <script src="../script/summer-canvas.js"></script>
 </body>
 
 </html>

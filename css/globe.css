@@ -54,7 +54,7 @@
     font-family: "Pretendard", "Noto Sans KR", sans-serif;
 }
 
-.globe-frame .overlay > * {
+.globe-frame .overlay>* {
     pointer-events: auto;
 }
 

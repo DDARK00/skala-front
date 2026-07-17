@@ -366,7 +366,7 @@
 
                     <p style="font-size: 14px; color: var(--color-ink-soft);">🐙 GitHub: github.com/DDARK00
                         <button class="btn-small btn--ghost"
-                            onclick="window.location.href='https://github.com/DDARK00'">
+                            onclick="window.open('https://github.com/DDARK00')">
                             Go to Git</button>
                     </p>
                 </article>
@@ -377,8 +377,10 @@
     <!-- 푸터 -->
     <footer class="site-footer">
         <p>📋 나의 소개 페이지 | <time datetime="2026-07">2026년 7월</time></p>
-        <p style="margin-top: 8px;"><a href="#top">⬆️ 맨 위로 이동</a></p>
+        <p style="margin-top: 8px;"><a href="#" id="scrollTopLink">⬆️ 맨 위로 이동</a></p>
     </footer>
+
+    <button id="scrollTopBtn" class="scroll-top-btn" aria-label="맨 위로 이동" title="맨 위로 이동">⬆</button>
 
     <!-- 페이지 인터랙션 스크립트 -->
     <script>
@@ -430,7 +432,7 @@
                 const randomIdx = Math.floor(Math.random() * messages.length);
                 messageEl.textContent = "💡 " + messages[randomIdx];
                 confetti.launch({
-                    count:20
+                    count: 20
                 })
             });
 
@@ -468,8 +470,21 @@
                 event.preventDefault();
                 termsBox.open ? closeTerms() : openTerms();
             });
+        });
 
+        const scrollTopBtn = document.querySelector("#scrollTopBtn");
+        window.addEventListener("scroll", () => {
+            scrollTopBtn.classList.toggle("is-visible", window.scrollY > 400);
+        });
+        scrollTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
 
+        // 푸터 "맨 위로 이동" 링크도 smooth 스크롤로 동작
+        const scrollTopLink = document.querySelector("#scrollTopLink");
+        scrollTopLink.addEventListener("click", (event) => {
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
     </script>
 

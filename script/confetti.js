@@ -4,197 +4,154 @@
  */
 
 const confetti = (() => {
+  let canvas = null;
+  let ctx = null;
+  let animationId = null;
 
-    let canvas = null;
-    let ctx = null;
-    let animationId = null;
+  let width = 0;
+  let height = 0;
 
-    let width = 0;
-    let height = 0;
+  let pieces = [];
 
-    let pieces = [];
+  const config = {
+    count: 50,
+    gravity: 0.18,
+    fade: 0.02,
+    duration: 1500,
+  };
 
-    const config = {
-        count: 50,
-        gravity: 0.18,
-        fade: 0.02,
-        duration: 1500
-    };
+  class Piece {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
 
-    class Piece {
+      this.vx = (Math.random() - 0.5) * 2;
 
-        constructor(x, y) {
+      this.vy = Math.random() * 2 + 2;
 
-            this.x = x;
-            this.y = y;
+      this.width = 5 + Math.random() * 5;
+      this.height = 8 + Math.random() * 6;
 
-            this.vx = (Math.random() - 0.5) * 2;
+      this.rotation = Math.random() * Math.PI * 2;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.2;
 
-            this.vy = Math.random() * 2 + 2;
+      this.swing = Math.random() * Math.PI * 2;
 
-            this.width = 5 + Math.random() * 5;
-            this.height = 8 + Math.random() * 6;
+      this.alpha = 1;
 
-            this.rotation = Math.random() * Math.PI * 2;
-            this.rotationSpeed = (Math.random() - 0.5) * 0.2;
-
-            this.swing = Math.random() * Math.PI * 2;
-
-            this.alpha = 1;
-
-            this.color =
-                `hsl(${Math.random() * 360},85%,60%)`;
-        }
-
-        update() {
-
-            this.swing += 0.08;
-
-            this.x += this.vx + Math.sin(this.swing) * 0.8;
-
-            this.y += this.vy;
-
-            this.rotation += this.rotationSpeed;
-
-        }
-        draw(ctx) {
-
-            ctx.save();
-
-            ctx.globalAlpha = this.alpha;
-
-            ctx.translate(this.x, this.y);
-
-            ctx.rotate(this.rotation);
-
-            ctx.fillStyle = this.color;
-
-            ctx.fillRect(
-                -this.width / 2,
-                -this.height / 2,
-                this.width,
-                this.height
-            );
-
-            ctx.restore();
-        }
-
-        get dead() {
-
-            return this.y > height + 40;
-
-        }
-
+      this.color = `hsl(${Math.random() * 360},85%,60%)`;
     }
 
-    function resize() {
+    update() {
+      this.swing += 0.08;
 
-        width = window.innerWidth;
-        height = window.innerHeight;
+      this.x += this.vx + Math.sin(this.swing) * 0.8;
 
-        canvas.width = width;
-        canvas.height = height;
+      this.y += this.vy;
 
+      this.rotation += this.rotationSpeed;
+    }
+    draw(ctx) {
+      ctx.save();
+
+      ctx.globalAlpha = this.alpha;
+
+      ctx.translate(this.x, this.y);
+
+      ctx.rotate(this.rotation);
+
+      ctx.fillStyle = this.color;
+
+      ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
+
+      ctx.restore();
     }
 
-    function animate() {
-
-        animationId = requestAnimationFrame(animate);
-
-        ctx.clearRect(0, 0, width, height);
-
-        pieces.forEach(piece => {
-
-            piece.update();
-            piece.draw(ctx);
-
-        });
-
-        pieces = pieces.filter(piece => !piece.dead);
-
+    get dead() {
+      return this.y > height + 40;
     }
+  }
 
-    function mount() {
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
 
-        if (canvas) return;
+    canvas.width = width;
+    canvas.height = height;
+  }
 
-        const layer = document.createElement("div");
+  function animate() {
+    animationId = requestAnimationFrame(animate);
 
-        Object.assign(layer.style, {
-            position: "fixed",
-            inset: "0",
-            pointerEvents: "none",
-            zIndex: "99999"
-        });
+    ctx.clearRect(0, 0, width, height);
 
-        canvas = document.createElement("canvas");
+    pieces.forEach((piece) => {
+      piece.update();
+      piece.draw(ctx);
+    });
 
-        layer.appendChild(canvas);
+    pieces = pieces.filter((piece) => !piece.dead);
+  }
 
-        document.body.appendChild(layer);
+  function mount() {
+    if (canvas) return;
 
-        ctx = canvas.getContext("2d");
+    const layer = document.createElement("div");
 
-        resize();
+    Object.assign(layer.style, {
+      position: "fixed",
+      inset: "0",
+      pointerEvents: "none",
+      zIndex: "99999",
+    });
 
-        window.addEventListener("resize", resize);
+    canvas = document.createElement("canvas");
 
-        animate();
+    layer.appendChild(canvas);
 
-    }
+    document.body.appendChild(layer);
 
-    function launch() {
+    ctx = canvas.getContext("2d");
 
-        if (!canvas)
-            mount();
+    resize();
 
-        const duration = 3000;
-        const interval = 80;
+    window.addEventListener("resize", resize);
 
-        const timer = setInterval(() => {
+    animate();
+  }
 
-            for (let i = 0; i < 6; i++) {
+  function launch() {
+    if (!canvas) mount();
 
-                pieces.push(
-                    new Piece(
-                        Math.random() * width,
-                        -20
-                    )
-                );
+    const duration = 3000;
+    const interval = 80;
 
-            }
+    const timer = setInterval(() => {
+      for (let i = 0; i < 6; i++) {
+        pieces.push(new Piece(Math.random() * width, -20));
+      }
+    }, interval);
 
-        }, interval);
+    setTimeout(() => {
+      clearInterval(timer);
+    }, duration);
+  }
 
-        setTimeout(() => {
+  function destroy() {
+    cancelAnimationFrame(animationId);
 
-            clearInterval(timer);
+    window.removeEventListener("resize", resize);
 
-        }, duration);
+    canvas?.parentElement.remove();
 
-    }
+    canvas = null;
+    ctx = null;
+    pieces = [];
+  }
 
-    function destroy() {
-
-        cancelAnimationFrame(animationId);
-
-        window.removeEventListener(
-            "resize",
-            resize
-        );
-
-        canvas?.parentElement.remove();
-
-        canvas = null;
-        ctx = null;
-        pieces = [];
-
-    }
-
-    return {
-        mount,
-        launch,
-        destroy
-    };
-
+  return {
+    mount,
+    launch,
+    destroy,
+  };
 })();

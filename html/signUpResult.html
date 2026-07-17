@@ -109,7 +109,9 @@
 
     <footer class="site-footer">
         <small>📅 작성일: <time datetime="2026-07">2026년 7월</time><br>감사합니다. 😊</small>
+        <p><a href="#" id="scrollTopLink">⬆ 맨 위로 이동</a></p>
     </footer>
+    <button id="scrollTopBtn" class="scroll-top-btn" aria-label="맨 위로 이동" title="맨 위로 이동">⬆</button>
 
     <script>
         const stepsBox = document.querySelector(".result-steps");
@@ -160,6 +162,22 @@
     <!-- \전역 분리용 Canvas 앵커 컨테이너 및 여름 계절감 배경 모듈 스크립트 -->
     <div id="summer-canvas-anchor"></div>
     <script src="../script/summer-canvas.js"></script>
+    <script>
+        const scrollTopBtn = document.querySelector("#scrollTopBtn");
+        window.addEventListener("scroll", () => {
+            scrollTopBtn.classList.toggle("is-visible", window.scrollY > 400);
+        });
+        scrollTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // 푸터 "맨 위로 이동" 링크도 smooth 스크롤로 동작
+        const scrollTopLink = document.querySelector("#scrollTopLink");
+        scrollTopLink.addEventListener("click", (event) => {
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </script>
 </body>
 
 </html>

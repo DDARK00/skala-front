@@ -494,9 +494,10 @@
             &#128197; 휴일 버전 작성일: <time datetime="2026-07">2026년 7월</time>
         </p>
         <p>
-            <a href="#top" class="top-link">&#11014; 맨 위로 이동</a>
+            <a href="#" id="scrollTopLink" class="top-link">&#11014; 맨 위로 이동</a>
         </p>
     </footer>
+    <button id="scrollTopBtn" class="scroll-top-btn" aria-label="맨 위로 이동" title="맨 위로 이동">⬆</button>
 
     <div id="summer-canvas-anchor"></div>
     <script src="../script/summer-canvas.js"></script>
@@ -544,6 +545,23 @@
                     }
                 });
             });
+        });
+
+        // 7. 스크롤을 일정 이상 내렸을 때만 나타나는 "맨 위로" 플로팅 버튼
+        const scrollTopBtn = document.querySelector("#scrollTopBtn");
+        window.addEventListener("scroll", () => {
+            scrollTopBtn.classList.toggle("is-visible", window.scrollY > 400);
+        });
+        scrollTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+
+        // 푸터 "맨 위로 이동" 링크도 smooth 스크롤로 동작
+        const scrollTopLink = document.querySelector("#scrollTopLink");
+        scrollTopLink.addEventListener("click", (event) => {
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
     </script>
 </body>

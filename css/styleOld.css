@@ -164,6 +164,7 @@
             border-radius: 15px;
         }
 
-        .vlog p, .vlog small {
-            margin : 15px;
+        .vlog p,
+        .vlog small {
+            margin: 15px;
         }
