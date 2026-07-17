@@ -926,13 +926,14 @@ video {
     background: var(--color-paper);
     border: 1px solid rgba(35, 43, 61, .16);
     border-radius: 999px;
-    padding: 9px 16px;
     transition: border-color .2s var(--ease), background .2s var(--ease);
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
 }
-
+.choice > li {
+    padding: 9px 16px;   
+}
 .choice:has(input:checked) {
     border-color: var(--color-teal);
     background: rgba(63, 108, 99, .1);
